@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contact — {{ entreprise_nom }}{% endblock %}
+
+{% block body %}
+
+    <header class="page-header">
+        <div class="container">
+            <h1>Contactez-nous</h1>
+            <p>La façon la plus rapide de nous joindre : WhatsApp.</p>
+        </div>
+    </header>
+
+    <section class="section">
+        <div class="container">
+            <div class="row g-5">
+
+                <div class="col-lg-6">
+                    <div class="contact-hero-btn">
+                        <h2>Discutons de votre installation</h2>
+                        <p class="text-muted mb-4">Réponse rapide, sans engagement.</p>
+                        <a href="https://wa.me/{{ whatsapp_number }}?text={{ whatsapp_message_defaut|url_encode }}"
+                           target="_blank" rel="noopener" class="btn-whatsapp btn-whatsapp--lg">
+                            {{ include('partials/_icone_whatsapp.html.twig') }}
+                            Discuter sur WhatsApp
+                        </a>
+                    </div>
+
+                    <div class="mt-5">
+                        <div class="contact-info-item">
+                            <span class="icon-circle">📞</span>
+                            <div>
+                                <h4>Téléphone</h4>
+                                <p><a href="tel:{{ entreprise_telephone|replace({' ': ''}) }}">{{ entreprise_telephone }}</a></p>
+                            </div>
+                        </div>
+                        <div class="contact-info-item">
+                            <span class="icon-circle">✉️</span>
+                            <div>
+                                <h4>Email</h4>
+                                <p><a href="mailto:{{ entreprise_email }}">{{ entreprise_email }}</a></p>
+                            </div>
+                        </div>
+                        <div class="contact-info-item">
+                            <span class="icon-circle">📍</span>
+                            <div>
+                                <h4>Zone de couverture</h4>
+                                <p>{{ entreprise_zone }}</p>
+                            </div>
+                        </div>
+                        <div class="contact-info-item">
+                            <span class="icon-circle">🕒</span>
+                            <div>
+                                <h4>Horaires</h4>
+                                <p>Lundi – Samedi : 9h – 19h<br>Dimanche : fermé</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="map-wrapper">
+                        <iframe
+                            src="https://www.google.com/maps?q=Bruxelles,Belgique&output=embed"
+                            loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"
+                            title="Zone d'intervention {{ entreprise_nom }}">
+                        </iframe>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

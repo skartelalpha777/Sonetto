@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nos produits — {{ entreprise_nom }}{% endblock %}
+
+{% block body %}
+
+    <header class="page-header">
+        <div class="container">
+            <h1>Nos sonnettes vidéo connectées</h1>
+            <p>Filtrez par catégorie pour trouver le modèle qui vous correspond.</p>
+        </div>
+    </header>
+
+    <section class="section">
+        <div class="container">
+
+            {# ==================== FILTRES ==================== #}
+            <div class="filtres-bar d-flex flex-wrap gap-2 justify-content-center">
+                <button type="button" class="filtre-btn active" data-filtre="tous">Tous</button>
+                {% for categorie in categories %}
+                    <button type="button" class="filtre-btn" data-filtre="{{ categorie.id }}">{{ categorie.nom }}</button>
+                {% endfor %}
+            </div>
+
+            {# ==================== GRILLE PRODUITS ==================== #}
+            {% if produits is empty %}
+                <p class="text-center text-muted">Aucun produit publié pour le moment. Ajoutez-en depuis l'espace <a href="{{ path('app_produit_index') }}">administration</a>.</p>
+            {% else %}
+                <div class="row g-4">
+                    {% for produit in produits %}
+                        {{ include('partials/_carte_produit.html.twig', { produit: produit }) }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+        </div>
+    </section>
+
+{% endblock %}

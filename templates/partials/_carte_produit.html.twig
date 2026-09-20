@@ -1,0 +1,31 @@
+{# Carte produit réutilisée sur la page d'accueil et la page catalogue.
+   Variable attendue : produit (entité App\Entity\Produit) #}
+<div class="col-md-6 col-lg-4 produit-card-col" data-categorie="{{ produit.categorie.id }}">
+    <div class="produit-card">
+        <img src="{{ produit.image ? asset('images/produits/' ~ produit.image) : asset('images/placeholder-produit.svg') }}"
+             alt="{{ produit.nom }}" class="produit-card__image">
+
+        <div class="produit-card__body">
+            <span class="produit-card__categorie">{{ produit.categorie.nom }}</span>
+            <h3>{{ produit.nom }}</h3>
+
+            <ul class="produit-card__specs">
+                {% if produit.resolution %}<li>Résolution : {{ produit.resolution }}</li>{% endif %}
+                {% if produit.autonomie %}<li>Autonomie : {{ produit.autonomie }}</li>{% endif %}
+                {% if produit.stockage %}<li>Stockage : {{ produit.stockage }}</li>{% endif %}
+                <li>Alimentation : {{ produit.alimentation }}</li>
+            </ul>
+
+            <div class="produit-card__footer">
+                <div class="produit-card__prix">
+                    {{ produit.prix|number_format(0, ',', ' ') }} €
+                    <small>installation incluse</small>
+                </div>
+                <a href="https://wa.me/{{ whatsapp_number }}?text={{ ('Bonjour, je souhaite installer le modèle "' ~ produit.nom ~ '"')|url_encode }}"
+                   target="_blank" rel="noopener" class="btn-whatsapp btn-whatsapp--sm">
+                    Je veux ce modèle
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}À propos — {{ entreprise_nom }}{% endblock %}
+
+{% block body %}
+
+    <header class="page-header">
+        <div class="container">
+            <h1>À propos de {{ entreprise_nom }}</h1>
+            <p>Spécialiste de la sonnette vidéo connectée à Bruxelles.</p>
+        </div>
+    </header>
+
+    <section class="section">
+        <div class="container">
+            <div class="row g-5 align-items-center">
+                <div class="col-lg-6">
+                    <h2>Notre mission</h2>
+                    <p>
+                        {{ entreprise_nom }} vend, installe et configure des sonnettes vidéo connectées
+                        directement chez les particuliers. Notre objectif : que chacun puisse voir et parler
+                        à ses visiteurs depuis son smartphone, sans se soucier de la partie technique.
+                    </p>
+                    <p>
+                        Nous intervenons à {{ entreprise_zone }}, du choix du modèle à la configuration
+                        complète de l'application sur votre téléphone.
+                    </p>
+
+                    <h2 class="mt-4">Notre zone d'intervention</h2>
+                    <p>
+                        Bruxelles et sa périphérie : Ixelles, Uccle, Schaerbeek, Etterbeek, Woluwe,
+                        Anderlecht, Molenbeek et les communes environnantes.
+                    </p>
+                </div>
+                <div class="col-lg-6">
+                    <div class="feature-card text-start">
+                        <div class="icon-circle">💳</div>
+                        <h3>Pourquoi "payez après installation" ?</h3>
+                        <p>
+                            Nous savons que réserver un devis ou verser un acompte pour un appareil
+                            que l'on n'a pas encore vu fonctionner peut freiner. C'est pour ça que nous
+                            avons choisi un modèle simple : nous installons d'abord, vous testez la
+                            sonnette pendant quelques jours, et vous ne réglez la facture que si vous
+                            êtes pleinement satisfait.
+                        </p>
+                        <p class="mb-0">
+                            C'est notre manière de nous engager sur la qualité de l'installation plutôt
+                            que sur un discours commercial.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section bg-alt">
+        <div class="container text-center">
+            <h2>Une question avant de vous décider ?</h2>
+            <p class="text-muted mb-4">Écrivez-nous directement sur WhatsApp, on vous répond rapidement.</p>
+            <a href="https://wa.me/{{ whatsapp_number }}?text={{ whatsapp_message_defaut|url_encode }}"
+               target="_blank" rel="noopener" class="btn-whatsapp btn-whatsapp--lg">
+                {{ include('partials/_icone_whatsapp.html.twig') }}
+                Discuter sur WhatsApp
+            </a>
+        </div>
+    </section>
+
+{% endblock %}

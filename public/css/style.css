@@ -1,0 +1,645 @@
+/* ==========================================================================
+   Sonetto — feuille de style commune à toutes les pages publiques
+   Bootstrap gère la grille/flexbox, ce fichier gère tout le design
+   (couleurs, typographie, cartes, navbar, footer, hero, animations).
+   ========================================================================== */
+
+:root {
+    /* Palette */
+    --color-dark: #0b1e3d;      /* bleu marine très foncé — navbar, footer, textes forts */
+    --color-dark-2: #13294b;    /* variante un peu plus claire (dégradés, hover) */
+    --color-primary: #2563eb;   /* bleu confiance — liens, titres, boutons secondaires */
+    --color-primary-light: #60a5fa;
+    --color-accent: #22c55e;    /* vert — garantie / validation / badges de confiance */
+    --color-whatsapp: #25d366;  /* vert officiel WhatsApp — CTA principal */
+    --color-whatsapp-dark: #1ebe5d;
+    --color-bg: #f5f7fa;        /* fond général des pages */
+    --color-surface: #ffffff;   /* fond des cartes */
+    --color-text: #1e293b;
+    --color-muted: #64748b;
+    --color-border: #e2e8f0;
+
+    --radius: 14px;
+    --radius-sm: 8px;
+    --shadow-sm: 0 4px 12px rgba(11, 30, 61, 0.06);
+    --shadow-md: 0 10px 30px rgba(11, 30, 61, 0.10);
+    --transition: all 0.2s ease-in-out;
+}
+
+/* ---------- Base ---------- */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    line-height: 1.6;
+}
+
+h1, h2, h3, h4 {
+    font-weight: 700;
+    color: var(--color-dark);
+}
+
+a {
+    text-decoration: none;
+    color: var(--color-primary);
+}
+
+.section {
+    padding: 4rem 0;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.section-title h2 {
+    font-size: 2rem;
+}
+
+.section-title p {
+    color: var(--color-muted);
+    max-width: 600px;
+    margin: 0.5rem auto 0;
+}
+
+.bg-alt {
+    background-color: #eef2f8;
+}
+
+/* ---------- Bouton WhatsApp (utilisé partout : navbar, hero, cartes, contact) ---------- */
+.btn-whatsapp {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: var(--color-whatsapp);
+    color: #fff;
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    border: none;
+    transition: var(--transition);
+    white-space: nowrap;
+}
+
+.btn-whatsapp:hover {
+    background-color: var(--color-whatsapp-dark);
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.btn-whatsapp svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+}
+
+.btn-whatsapp--lg {
+    padding: 1rem 2.25rem;
+    font-size: 1.1rem;
+}
+
+.btn-whatsapp--sm {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+}
+
+.btn-outline-primary-custom {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: 2px solid var(--color-primary);
+    color: var(--color-primary);
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    background: transparent;
+    transition: var(--transition);
+}
+
+.btn-outline-primary-custom:hover {
+    background-color: var(--color-primary);
+    color: #fff;
+}
+
+/* ---------- Navbar ---------- */
+.navbar-sonetto {
+    background-color: var(--color-dark);
+    padding: 0.9rem 0;
+}
+
+.navbar-sonetto .navbar-brand {
+    color: #fff;
+    font-weight: 800;
+    font-size: 1.4rem;
+    letter-spacing: -0.5px;
+}
+
+.navbar-sonetto .navbar-brand span {
+    color: var(--color-primary-light);
+}
+
+.navbar-sonetto .nav-link {
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 500;
+    padding: 0.5rem 1rem !important;
+    transition: var(--transition);
+}
+
+.navbar-sonetto .nav-link:hover,
+.navbar-sonetto .nav-link.active {
+    color: #fff;
+}
+
+.navbar-sonetto .dropdown-menu {
+    border: none;
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-md);
+    margin-top: 0.5rem;
+}
+
+.navbar-sonetto .dropdown-item:active,
+.navbar-sonetto .dropdown-item.active {
+    background-color: var(--color-primary);
+}
+
+.navbar-sonetto .navbar-toggler {
+    border: none;
+    color: #fff;
+}
+
+.navbar-sonetto .navbar-toggler:focus {
+    box-shadow: none;
+}
+
+/* ---------- Hero (page d'accueil) ---------- */
+.hero {
+    background: linear-gradient(135deg, var(--color-dark) 0%, var(--color-dark-2) 60%, #1d3a63 100%);
+    color: #fff;
+    padding: 6rem 0 5rem;
+}
+
+.hero h1 {
+    color: #fff;
+    font-size: 2.75rem;
+    font-weight: 800;
+    line-height: 1.2;
+}
+
+.hero h1 .highlight {
+    color: var(--color-primary-light);
+}
+
+.hero p.lead {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 1.2rem;
+    max-width: 560px;
+}
+
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(34, 197, 94, 0.15);
+    color: #86efac;
+    border: 1px solid rgba(34, 197, 94, 0.4);
+    padding: 0.4rem 1rem;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+}
+
+.hero-image-wrapper {
+    position: relative;
+}
+
+.hero-image-wrapper img {
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-md);
+}
+
+/* Petites pages (about, produits, contact) : bandeau plus court */
+.page-header {
+    background: linear-gradient(135deg, var(--color-dark) 0%, var(--color-dark-2) 100%);
+    color: #fff;
+    padding: 3.5rem 0;
+    text-align: center;
+}
+
+.page-header h1 {
+    color: #fff;
+    margin-bottom: 0.5rem;
+}
+
+.page-header p {
+    color: rgba(255, 255, 255, 0.8);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* ---------- Cartes "Pourquoi nous choisir" ---------- */
+.feature-card {
+    background: var(--color-surface);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    padding: 2rem 1.5rem;
+    height: 100%;
+    text-align: center;
+    transition: var(--transition);
+}
+
+.feature-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-4px);
+}
+
+.feature-card .icon-circle {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: rgba(37, 99, 235, 0.1);
+    color: var(--color-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.75rem;
+    margin: 0 auto 1.25rem;
+}
+
+.feature-card h3 {
+    font-size: 1.15rem;
+    margin-bottom: 0.5rem;
+}
+
+.feature-card p {
+    color: var(--color-muted);
+    font-size: 0.95rem;
+    margin-bottom: 0;
+}
+
+/* ---------- Cartes produits ---------- */
+.produit-card {
+    background: var(--color-surface);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    transition: var(--transition);
+}
+
+.produit-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-4px);
+}
+
+.produit-card__image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    background-color: #dbe3ee;
+}
+
+.produit-card__body {
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.produit-card__categorie {
+    display: inline-block;
+    align-self: flex-start;
+    background: rgba(37, 99, 235, 0.1);
+    color: var(--color-primary);
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.25rem 0.75rem;
+    border-radius: 50px;
+    margin-bottom: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.produit-card__body h3 {
+    font-size: 1.15rem;
+    margin-bottom: 0.5rem;
+}
+
+.produit-card__specs {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1rem;
+    font-size: 0.85rem;
+    color: var(--color-muted);
+}
+
+.produit-card__specs li {
+    padding: 0.15rem 0;
+}
+
+.produit-card__specs li::before {
+    content: "✓";
+    color: var(--color-accent);
+    font-weight: 700;
+    margin-right: 0.4rem;
+}
+
+.produit-card__footer {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--color-border);
+}
+
+.produit-card__prix {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: var(--color-dark);
+}
+
+.produit-card__prix small {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--color-muted);
+}
+
+/* ---------- Filtres produits (page catalogue) ---------- */
+.filtres-bar {
+    background: var(--color-surface);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    padding: 1.25rem;
+    margin-bottom: 2.5rem;
+}
+
+.filtre-btn {
+    border: 1px solid var(--color-border);
+    background: #fff;
+    color: var(--color-text);
+    padding: 0.45rem 1.1rem;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.filtre-btn:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+}
+
+.filtre-btn.active {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: #fff;
+}
+
+/* ---------- Étapes "Comment ça marche" ---------- */
+.etape {
+    text-align: center;
+    padding: 1.5rem;
+}
+
+.etape__numero {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 1.4rem;
+    margin: 0 auto 1rem;
+}
+
+.etape h3 {
+    font-size: 1.1rem;
+}
+
+.etape p {
+    color: var(--color-muted);
+    font-size: 0.95rem;
+}
+
+/* ---------- Newsletter ---------- */
+.newsletter {
+    background: var(--color-primary);
+    background: linear-gradient(120deg, var(--color-primary) 0%, #1d4ed8 100%);
+    border-radius: var(--radius);
+    padding: 3rem;
+    color: #fff;
+    text-align: center;
+}
+
+.newsletter h2 {
+    color: #fff;
+}
+
+.newsletter .form-control {
+    border-radius: 50px;
+    border: none;
+    padding: 0.75rem 1.25rem;
+}
+
+.newsletter button {
+    border-radius: 50px;
+    font-weight: 700;
+    padding: 0.75rem 1.75rem;
+    background: var(--color-dark);
+    border: none;
+    color: #fff;
+    transition: var(--transition);
+}
+
+.newsletter button:hover {
+    background: #000;
+}
+
+/* ---------- Footer ---------- */
+.footer {
+    background: var(--color-dark);
+    color: rgba(255, 255, 255, 0.75);
+    padding-top: 3.5rem;
+}
+
+.footer h4 {
+    color: #fff;
+    font-size: 1rem;
+    margin-bottom: 1.1rem;
+}
+
+.footer a {
+    color: rgba(255, 255, 255, 0.65);
+    display: block;
+    margin-bottom: 0.5rem;
+    transition: var(--transition);
+}
+
+.footer a:hover {
+    color: #fff;
+}
+
+.footer .footer-badges {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 2rem 0;
+    margin: 2.5rem 0 0;
+}
+
+.footer-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-weight: 600;
+    color: #fff;
+    font-size: 0.95rem;
+}
+
+.footer-badge .icon-circle {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: rgba(34, 197, 94, 0.15);
+    color: var(--color-accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.footer-bottom {
+    padding: 1.5rem 0;
+    text-align: center;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.footer-social a {
+    display: inline-flex;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    align-items: center;
+    justify-content: center;
+    margin-right: 0.5rem;
+}
+
+.footer-social a:hover {
+    background: var(--color-primary);
+}
+
+/* ---------- Page Contact ---------- */
+.contact-hero-btn {
+    background: var(--color-surface);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-md);
+    padding: 3rem;
+    text-align: center;
+}
+
+.contact-info-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1.75rem;
+}
+
+.contact-info-item .icon-circle {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(37, 99, 235, 0.1);
+    color: var(--color-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 1.25rem;
+}
+
+.contact-info-item h4 {
+    margin-bottom: 0.15rem;
+    font-size: 1rem;
+}
+
+.contact-info-item p {
+    color: var(--color-muted);
+    margin-bottom: 0;
+}
+
+.map-wrapper {
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+}
+
+.map-wrapper iframe {
+    width: 100%;
+    height: 350px;
+    border: 0;
+    display: block;
+}
+
+/* ---------- Bouton WhatsApp flottant (mobile) ---------- */
+.whatsapp-float {
+    position: fixed;
+    bottom: 1.25rem;
+    right: 1.25rem;
+    z-index: 1050;
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    background: var(--color-whatsapp);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-md);
+}
+
+.whatsapp-float svg {
+    width: 28px;
+    height: 28px;
+    fill: #fff;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 991.98px) {
+    .hero {
+        padding: 4rem 0 3rem;
+        text-align: center;
+    }
+
+    .hero p.lead {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .hero-image-wrapper {
+        margin-top: 2.5rem;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .section {
+        padding: 3rem 0;
+    }
+
+    .newsletter {
+        padding: 2rem 1.25rem;
+    }
+}
