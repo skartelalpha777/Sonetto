@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 480" width="520" height="480">
+  <!-- Porte -->
+  <rect x="0" y="0" width="320" height="480" rx="18" fill="#3c2b1e"/>
+  <rect x="18" y="18" width="284" height="444" rx="10" fill="#4a3524"/>
+
+  <!-- Sonnette -->
+  <rect x="205" y="150" width="86" height="180" rx="16" fill="#0b1e3d" stroke="#2563eb" stroke-width="3"/>
+  <circle cx="248" cy="200" r="22" fill="#13294b" stroke="#60a5fa" stroke-width="3"/>
+  <circle cx="248" cy="200" r="8" fill="#60a5fa"/>
+  <rect x="228" y="240" width="40" height="11" rx="5.5" fill="#25d366"/>
+  <rect x="234" y="262" width="28" height="6" rx="3" fill="#334155"/>
+
+  <!-- Ondes de connexion -->
+  <path d="M300 160c26 24 26 116 0 140" stroke="#60a5fa" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.55"/>
+  <path d="M316 140c40 34 40 166 0 200" stroke="#60a5fa" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.35"/>
+
+  <!-- Téléphone -->
+  <g transform="translate(330,90)">
+    <rect x="0" y="0" width="170" height="330" rx="28" fill="#0f172a" stroke="#1e293b" stroke-width="4"/>
+    <rect x="10" y="14" width="150" height="302" rx="18" fill="#13294b"/>
+
+    <!-- Ecran appel video -->
+    <rect x="18" y="24" width="134" height="180" rx="12" fill="#1d3a63"/>
+    <circle cx="85" cy="90" r="30" fill="#2563eb"/>
+    <circle cx="85" cy="78" r="12" fill="#dbeafe"/>
+    <path d="M62 118c0-14 10-22 23-22s23 8 23 22" fill="#dbeafe"/>
+
+    <text x="85" y="216" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="middle" font-weight="700">Sonetto</text>
+    <text x="85" y="232" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#93c5fd" text-anchor="middle">Porte d'entrée</text>
+
+    <!-- Boutons appel -->
+    <circle cx="60" cy="270" r="18" fill="#1e293b"/>
+    <circle cx="110" cy="270" r="18" fill="#ef4444"/>
+    <path d="M53 270h14M60 263v14" stroke="#94a3b8" stroke-width="2"/>
+  </g>
+
+  <!-- Badge notification -->
+  <g transform="translate(360,60)">
+    <rect x="0" y="0" width="118" height="34" rx="17" fill="#22c55e"/>
+    <text x="59" y="22" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="700" fill="#ffffff" text-anchor="middle">● En direct</text>
+  </g>
+</svg>

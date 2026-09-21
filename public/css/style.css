@@ -6,23 +6,31 @@
 
 :root {
     /* Palette */
-    --color-dark: #0b1e3d;      /* bleu marine très foncé — navbar, footer, textes forts */
-    --color-dark-2: #13294b;    /* variante un peu plus claire (dégradés, hover) */
-    --color-primary: #2563eb;   /* bleu confiance — liens, titres, boutons secondaires */
+    --color-dark: #0b1e3d;
+    /* bleu marine très foncé — hero, footer, bandeau CTA */
+    --color-dark-2: #13294b;
+    /* variante un peu plus claire (dégradés, hover) */
+    --color-primary: #2563eb;
+    /* bleu confiance — navbar, boutons, icônes, liens */
+    --color-primary-dark: #1d4ed8;
     --color-primary-light: #60a5fa;
-    --color-accent: #22c55e;    /* vert — garantie / validation / badges de confiance */
-    --color-whatsapp: #25d366;  /* vert officiel WhatsApp — CTA principal */
+    --color-accent: #22c55e;
+    /* vert — garantie / validation / badges de confiance */
+    --color-whatsapp:  #1677FF;;
+    /* vert officiel WhatsApp — CTA du bandeau final */
     --color-whatsapp-dark: #1ebe5d;
-    --color-bg: #f5f7fa;        /* fond général des pages */
-    --color-surface: #ffffff;   /* fond des cartes */
+    --color-bg: #ffffff;
+    /* fond général des pages */
+    --color-surface: #ffffff;
+    /* fond des cartes */
     --color-text: #1e293b;
     --color-muted: #64748b;
     --color-border: #e2e8f0;
 
-    --radius: 14px;
-    --radius-sm: 8px;
-    --shadow-sm: 0 4px 12px rgba(11, 30, 61, 0.06);
-    --shadow-md: 0 10px 30px rgba(11, 30, 61, 0.10);
+    --radius: 16px;
+    --radius-sm: 10px;
+    --shadow-sm: 0 4px 16px rgba(11, 30, 61, 0.07);
+    --shadow-md: 0 14px 34px rgba(11, 30, 61, 0.12);
     --transition: all 0.2s ease-in-out;
 }
 
@@ -38,8 +46,11 @@ body {
     line-height: 1.6;
 }
 
-h1, h2, h3, h4 {
-    font-weight: 700;
+h1,
+h2,
+h3,
+h4 {
+    font-weight: 800;
     color: var(--color-dark);
 }
 
@@ -49,7 +60,18 @@ a {
 }
 
 .section {
-    padding: 4rem 0;
+    padding: 5rem 0;
+}
+
+.section-eyebrow {
+    display: block;
+    text-align: center;
+    color: var(--color-primary);
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
 }
 
 .section-title {
@@ -58,20 +80,67 @@ a {
 }
 
 .section-title h2 {
-    font-size: 2rem;
+    font-size: 2.1rem;
 }
 
 .section-title p {
     color: var(--color-muted);
     max-width: 600px;
-    margin: 0.5rem auto 0;
+    margin: 0.6rem auto 0;
 }
 
 .bg-alt {
-    background-color: #eef2f8;
+    background-color: #eef3fc;
 }
 
-/* ---------- Bouton WhatsApp (utilisé partout : navbar, hero, cartes, contact) ---------- */
+.bg-white {
+    background-color: #ffffff;
+}
+
+/* ---------- Boutons ---------- */
+.btn-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: var(--color-primary);
+    color: #fff;
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    border: none;
+    transition: var(--transition);
+    white-space: nowrap;
+}
+
+.btn-pill:hover {
+    background-color: #1ebe5d;
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.btn-pill svg {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+}
+
+.btn-pill--lg {
+    padding: 1rem 2.25rem;
+    font-size: 1.1rem;
+}
+
+.btn-pill--sm {
+    padding: 0.5rem 1.1rem;
+    font-size: 0.9rem;
+}
+
+.btn-pill--block {
+    width: 100%;
+    justify-content: center;
+}
+
+/* Variante verte, réservée au bandeau CTA final (comme sur la maquette) */
 .btn-whatsapp {
     display: inline-flex;
     align-items: center;
@@ -109,12 +178,12 @@ a {
     font-size: 0.9rem;
 }
 
-.btn-outline-primary-custom {
+.btn-outline-light-custom {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    border: 2px solid var(--color-primary);
-    color: var(--color-primary);
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    color: #fff;
     font-weight: 600;
     padding: 0.75rem 1.5rem;
     border-radius: 50px;
@@ -122,30 +191,27 @@ a {
     transition: var(--transition);
 }
 
-.btn-outline-primary-custom:hover {
-    background-color: var(--color-primary);
-    color: #fff;
+.btn-outline-light-custom:hover {
+    background-color: #fff;
+    border-color: #fff;
+    color: var(--color-dark);
 }
 
 /* ---------- Navbar ---------- */
 .navbar-sonetto {
-    background-color: var(--color-dark);
+    background-color: white;
     padding: 0.9rem 0;
 }
 
 .navbar-sonetto .navbar-brand {
-    color: #fff;
+    color: #0B1E3D;
     font-weight: 800;
     font-size: 1.4rem;
     letter-spacing: -0.5px;
 }
 
-.navbar-sonetto .navbar-brand span {
-    color: var(--color-primary-light);
-}
-
 .navbar-sonetto .nav-link {
-    color: rgba(255, 255, 255, 0.85);
+    color: #0B1E3D;
     font-weight: 500;
     padding: 0.5rem 1rem !important;
     transition: var(--transition);
@@ -153,7 +219,7 @@ a {
 
 .navbar-sonetto .nav-link:hover,
 .navbar-sonetto .nav-link.active {
-    color: #fff;
+    color: #1677FF;
 }
 
 .navbar-sonetto .dropdown-menu {
@@ -178,15 +244,24 @@ a {
 }
 
 /* ---------- Hero (page d'accueil) ---------- */
+/* La photo (sonnette + téléphone) sert de fond à toute la section : un dégradé
+   sombre par-dessus garde le texte lisible côté gauche et laisse apparaître
+   la photo côté droit, comme sur la maquette. */
 .hero {
-    background: linear-gradient(135deg, var(--color-dark) 0%, var(--color-dark-2) 60%, #1d3a63 100%);
+    position: relative;
+    background-image:
+        url('/images/hero-img.png');
+    background-size: cover;
+    background-position: center right;
+    background-repeat: no-repeat;
     color: #fff;
-    padding: 6rem 0 5rem;
+    padding: 5.5rem 0;
+    overflow: hidden;
 }
 
 .hero h1 {
     color: #fff;
-    font-size: 2.75rem;
+    font-size: 2.85rem;
     font-weight: 800;
     line-height: 1.2;
 }
@@ -197,17 +272,17 @@ a {
 
 .hero p.lead {
     color: rgba(255, 255, 255, 0.85);
-    font-size: 1.2rem;
-    max-width: 560px;
+    font-size: 1.15rem;
+    max-width: 540px;
 }
 
 .hero-badge {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    background: rgba(34, 197, 94, 0.15);
-    color: #86efac;
-    border: 1px solid rgba(34, 197, 94, 0.4);
+    background: rgba(37, 99, 235, 0.18);
+    color: #bfdbfe;
+    border: 1px solid rgba(96, 165, 250, 0.4);
     padding: 0.4rem 1rem;
     border-radius: 50px;
     font-weight: 600;
@@ -215,13 +290,39 @@ a {
     margin-bottom: 1.5rem;
 }
 
-.hero-image-wrapper {
-    position: relative;
+/* Mini-fonctionnalités affichées dans le hero (icône + titre + sous-titre) */
+.hero-features {
+    margin: 2rem 0 2.25rem;
 }
 
-.hero-image-wrapper img {
-    border-radius: var(--radius);
-    box-shadow: var(--shadow-md);
+.hero-feature {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+}
+
+.hero-feature .icon-circle {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: rgba(37, 99, 235, 0.25);
+    color: #93c5fd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+}
+
+.hero-feature strong {
+    display: block;
+    color: #fff;
+    font-size: 0.92rem;
+}
+
+.hero-feature span {
+    color: white;
+    font-size: 0.8rem;
 }
 
 /* Petites pages (about, produits, contact) : bandeau plus court */
@@ -244,48 +345,49 @@ a {
 }
 
 /* ---------- Cartes "Pourquoi nous choisir" ---------- */
-.feature-card {
-    background: var(--color-surface);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow-sm);
-    padding: 2rem 1.5rem;
-    height: 100%;
+.feature-plain {
     text-align: center;
+    padding: 2rem 1.25rem;
+    border-radius: var(--radius);
     transition: var(--transition);
 }
 
-.feature-card:hover {
+.feature-plain:hover {
+    background: var(--color-surface);
     box-shadow: var(--shadow-md);
     transform: translateY(-4px);
 }
 
-.feature-card .icon-circle {
+.feature-plain .icon-circle {
     width: 64px;
     height: 64px;
-    border-radius: 50%;
-    background: rgba(37, 99, 235, 0.1);
-    color: var(--color-primary);
+    border-radius: 20px;
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+    color: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.75rem;
+    font-size: 1.6rem;
     margin: 0 auto 1.25rem;
+    box-shadow: 0 10px 22px rgba(37, 99, 235, 0.28);
 }
 
-.feature-card h3 {
-    font-size: 1.15rem;
-    margin-bottom: 0.5rem;
+.feature-plain h3 {
+    font-size: 1.05rem;
+    margin-bottom: 0.4rem;
 }
 
-.feature-card p {
+.feature-plain p {
     color: var(--color-muted);
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     margin-bottom: 0;
 }
 
 /* ---------- Cartes produits ---------- */
 .produit-card {
+    position: relative;
     background: var(--color-surface);
+    border: 1px solid var(--color-border);
     border-radius: var(--radius);
     box-shadow: var(--shadow-sm);
     overflow: hidden;
@@ -300,6 +402,21 @@ a {
     transform: translateY(-4px);
 }
 
+.produit-card__badge {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    z-index: 2;
+    background: var(--color-dark);
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 0.3rem 0.8rem;
+    border-radius: 50px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
 .produit-card__image {
     width: 100%;
     height: 200px;
@@ -308,7 +425,7 @@ a {
 }
 
 .produit-card__body {
-    padding: 1.25rem;
+    padding: 1.5rem;
     display: flex;
     flex-direction: column;
     flex-grow: 1;
@@ -329,57 +446,62 @@ a {
 }
 
 .produit-card__body h3 {
-    font-size: 1.15rem;
-    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+    margin-bottom: 0.2rem;
+}
+
+.produit-card__sous-titre {
+    color: var(--color-muted);
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
 }
 
 .produit-card__specs {
     list-style: none;
     padding: 0;
-    margin: 0 0 1rem;
-    font-size: 0.85rem;
-    color: var(--color-muted);
+    margin: 0 0 1.25rem;
+    font-size: 0.87rem;
+    color: var(--color-text);
 }
 
 .produit-card__specs li {
-    padding: 0.15rem 0;
+    padding: 0.2rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
 }
 
-.produit-card__specs li::before {
-    content: "✓";
-    color: var(--color-accent);
-    font-weight: 700;
-    margin-right: 0.4rem;
+.produit-card__specs li i {
+    color: var(--color-primary);
+    font-size: 0.85rem;
 }
 
 .produit-card__footer {
     margin-top: auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.75rem;
     padding-top: 1rem;
     border-top: 1px solid var(--color-border);
 }
 
 .produit-card__prix {
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     font-weight: 800;
     color: var(--color-dark);
+    margin-bottom: 0.15rem;
 }
 
-.produit-card__prix small {
+.produit-card__prix-note {
     display: block;
-    font-size: 0.7rem;
+    font-size: 0.78rem;
     font-weight: 500;
     color: var(--color-muted);
+    margin-bottom: 1rem;
 }
 
 /* ---------- Filtres produits (page catalogue) ---------- */
 .filtres-bar {
     background: var(--color-surface);
+    border: 1px solid var(--color-border);
     border-radius: var(--radius);
-    box-shadow: var(--shadow-sm);
     padding: 1.25rem;
     margin-bottom: 2.5rem;
 }
@@ -408,22 +530,38 @@ a {
 
 /* ---------- Étapes "Comment ça marche" ---------- */
 .etape {
+    position: relative;
     text-align: center;
     padding: 1.5rem;
 }
 
+/* Ligne pointillée reliant les étapes entre elles (masquée sur mobile, cf. media query) */
+.etape:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 34px;
+    left: 50%;
+    width: 100%;
+    height: 2px;
+    background-image: repeating-linear-gradient(to right, var(--color-border) 0 8px, transparent 8px 16px);
+    z-index: 0;
+}
+
 .etape__numero {
-    width: 56px;
-    height: 56px;
+    position: relative;
+    z-index: 1;
+    width: 68px;
+    height: 68px;
     border-radius: 50%;
-    background: var(--color-primary);
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
     color: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: 800;
-    font-size: 1.4rem;
-    margin: 0 auto 1rem;
+    font-size: 1.5rem;
+    margin: 0 auto 1.25rem;
+    box-shadow: 0 10px 24px rgba(37, 99, 235, 0.3);
 }
 
 .etape h3 {
@@ -435,10 +573,113 @@ a {
     font-size: 0.95rem;
 }
 
+/* ---------- Section "Notre engagement" (image + texte + badges) ---------- */
+.engagement-image {
+    position: relative;
+}
+
+/* Halo décoratif flouté derrière l'illustration, pour donner du relief */
+.engagement-image::before {
+    content: '';
+    position: absolute;
+    inset: -20px 10% -20px -10%;
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.16) 0%, rgba(34, 197, 94, 0.16) 100%);
+    border-radius: calc(var(--radius) * 1.6);
+    filter: blur(30px);
+    z-index: 0;
+}
+
+.engagement-image img {
+    position: relative;
+    z-index: 1;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-md);
+    width: 100%;
+}
+
+.engagement-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.75rem;
+}
+
+.engagement-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-weight: 600;
+    font-size: 0.88rem;
+    color: var(--color-dark);
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: 50px;
+    padding: 0.5rem 1rem 0.5rem 0.5rem;
+    box-shadow: var(--shadow-sm);
+}
+
+.engagement-badge .icon-circle {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(34, 197, 94, 0.12);
+    color: var(--color-accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.95rem;
+    flex-shrink: 0;
+}
+
+/* ---------- Bandeau CTA final ---------- */
+.cta-banner {
+    position: relative;
+    background: linear-gradient(120deg, var(--color-dark) 0%, var(--color-dark-2) 100%);
+    border-radius: var(--radius);
+    padding: 4rem 3.5rem;
+    color: #fff;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+/* Halos lumineux décoratifs, comme un fond "glow" de SaaS moderne */
+.cta-banner::before,
+.cta-banner::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    z-index: -1;
+    filter: blur(10px);
+}
+
+.cta-banner::before {
+    width: 320px;
+    height: 320px;
+    background: radial-gradient(circle, rgba(37, 99, 235, 0.5) 0%, transparent 70%);
+    top: -140px;
+    left: -80px;
+}
+
+.cta-banner::after {
+    width: 280px;
+    height: 280px;
+    background: radial-gradient(circle, rgba(37, 211, 102, 0.35) 0%, transparent 70%);
+    bottom: -120px;
+    right: -60px;
+}
+
+.cta-banner h2 {
+    color: #fff;
+    font-size: 2rem;
+}
+
+.cta-banner p {
+    color: rgba(255, 255, 255, 0.8);
+}
+
 /* ---------- Newsletter ---------- */
 .newsletter {
-    background: var(--color-primary);
-    background: linear-gradient(120deg, var(--color-primary) 0%, #1d4ed8 100%);
+    background: linear-gradient(120deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
     border-radius: var(--radius);
     padding: 3rem;
     color: #fff;
@@ -449,43 +690,97 @@ a {
     color: #fff;
 }
 
-.newsletter .form-control {
+/* Champ + bouton regroupés dans une seule pilule blanche */
+.newsletter-form {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: #fff;
     border-radius: 50px;
-    border: none;
-    padding: 0.75rem 1.25rem;
+    padding: 0.4rem;
+    max-width: 460px;
+    margin: 0 auto;
+    box-shadow: var(--shadow-md);
 }
 
-.newsletter button {
+.newsletter-form input {
+    flex: 1;
+    min-width: 0;
+    border: none;
+    background: transparent;
+    padding: 0.65rem 1.1rem;
+    color: var(--color-text);
+    font-size: 0.95rem;
+}
+
+.newsletter-form input:focus {
+    outline: none;
+}
+
+.newsletter-form button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
     border-radius: 50px;
     font-weight: 700;
-    padding: 0.75rem 1.75rem;
+    padding: 0.75rem 1.5rem;
     background: var(--color-dark);
     border: none;
     color: #fff;
+    white-space: nowrap;
     transition: var(--transition);
 }
 
-.newsletter button:hover {
+.newsletter-form button:hover {
     background: #000;
 }
 
+@media (max-width: 480px) {
+    .newsletter-form {
+        flex-direction: column;
+        background: transparent;
+        box-shadow: none;
+        gap: 0.75rem;
+    }
+
+    .newsletter-form input {
+        width: 100%;
+        background: #fff;
+        border-radius: 50px;
+        padding: 0.75rem 1.25rem;
+    }
+
+    .newsletter-form button {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
 /* ---------- Footer ---------- */
+/* Photo (technicien installant une sonnette) en fond, avec un voile bleu marine
+   par-dessus pour garder tout le texte du footer lisible. */
 .footer {
-    background: var(--color-dark);
+    position: relative;
+    background-image:
+        url('/images/image-footer.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     color: rgba(255, 255, 255, 0.75);
     padding-top: 3.5rem;
 }
 
 .footer h4 {
     color: #fff;
-    font-size: 1rem;
+    font-size: 0.95rem;
     margin-bottom: 1.1rem;
 }
 
 .footer a {
-    color: rgba(255, 255, 255, 0.65);
+    color: rgba(255, 255, 255, 0.6);
     display: block;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.55rem;
+    font-size: 0.92rem;
     transition: var(--transition);
 }
 
@@ -506,15 +801,15 @@ a {
     gap: 0.75rem;
     font-weight: 600;
     color: #fff;
-    font-size: 0.95rem;
+    font-size: 0.92rem;
 }
 
 .footer-badge .icon-circle {
     width: 42px;
     height: 42px;
     border-radius: 50%;
-    background: rgba(34, 197, 94, 0.15);
-    color: var(--color-accent);
+    background: #1d4ed8;
+    color: white;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -524,19 +819,20 @@ a {
 .footer-bottom {
     padding: 1.5rem 0;
     text-align: center;
-    font-size: 0.85rem;
-    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.83rem;
+    color: rgba(255, 255, 255, 0.45);
 }
 
 .footer-social a {
     display: inline-flex;
-    width: 38px;
-    height: 38px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.08);
     align-items: center;
     justify-content: center;
     margin-right: 0.5rem;
+    margin-bottom: 0;
 }
 
 .footer-social a:hover {
@@ -546,6 +842,7 @@ a {
 /* ---------- Page Contact ---------- */
 .contact-hero-btn {
     background: var(--color-surface);
+    border: 1px solid var(--color-border);
     border-radius: var(--radius);
     box-shadow: var(--shadow-md);
     padding: 3rem;
@@ -610,6 +907,9 @@ a {
     justify-content: center;
     box-shadow: var(--shadow-md);
 }
+.whatsapp-float:hover{
+    background: #1ebe5d;
+}
 
 .whatsapp-float svg {
     width: 28px;
@@ -620,26 +920,36 @@ a {
 /* ---------- Responsive ---------- */
 @media (max-width: 991.98px) {
     .hero {
-        padding: 4rem 0 3rem;
+        padding: 3.5rem 0;
         text-align: center;
     }
 
-    .hero p.lead {
+    .hero p.lead,
+    .hero-features {
         margin-left: auto;
         margin-right: auto;
     }
 
-    .hero-image-wrapper {
-        margin-top: 2.5rem;
+    .hero-feature {
+        text-align: left;
+    }
+
+    /* Sur petit écran le texte est centré sur toute la largeur : l'overlay
+       doit couvrir toute la photo pour rester lisible. */
+    .hero {
+        background-image:
+            linear-gradient(rgba(11, 30, 61, 0.93), rgba(11, 30, 61, 0.93)),
+            url('/images/hero-photo.jpg');
     }
 }
 
 @media (max-width: 767.98px) {
     .section {
-        padding: 3rem 0;
+        padding: 3.5rem 0;
     }
 
-    .newsletter {
+    .newsletter,
+    .cta-banner {
         padding: 2rem 1.25rem;
     }
 }

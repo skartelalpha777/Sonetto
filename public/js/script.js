@@ -40,23 +40,3 @@ function initFiltresProduits() {
     });
 }
 
-/**
- * Inscription newsletter : pas de backend pour l'instant, on affiche juste
- * un message de confirmation. À brancher plus tard sur une vraie entité/route.
- */
-function initNewsletter() {
-    const form = document.getElementById('newsletter-form');
-    if (!form) {
-        return;
-    }
-
-    form.addEventListener('submit', function (event) {
-        event.preventDefault();
-        const message = document.getElementById('newsletter-message');
-        if (message) {
-            message.textContent = 'Merci ! Vous êtes bien inscrit(e) à notre newsletter.';
-            message.classList.remove('d-none');
-        }
-        form.reset();
-    });
-}

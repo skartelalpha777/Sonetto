@@ -8,68 +8,62 @@
     <section class="hero">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-lg-6">
-                    <span class="hero-badge">✓ Payez seulement après installation</span>
-                    <h1>Une sonnette vidéo connectée, <span class="highlight">installée chez vous</span>, sans risque</h1>
+                <div class="col-lg-7">
+                    <span class="hero-badge"><i class="bi bi-shield-check"></i> Votre sécurité, notre priorité</span>
+                    <h1>Une sonnette vidéo connectée, installée chez vous, <span class="highlight">sans risque</span></h1>
                     <p class="lead">
-                        Pas de devis interminable, pas d'acompte à verser à l'avance.
-                        Nous installons votre sonnette vidéo à domicile et vous ne payez
-                        qu'une fois totalement satisfait.
+                        Surveillez votre porte, où que vous soyez. {{ entreprise_nom }} vous propose des sonnettes
+                        vidéo connectées de qualité, avec une installation professionnelle et une configuration complète.
                     </p>
-                    <div class="d-flex flex-wrap gap-3 mt-4">
+
+                    <div class="row hero-features g-3">
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="hero-feature">
+                                <span class="icon-circle"><i class="bi bi-eye"></i></span>
+                                <div>
+                                    <strong>Vision HD</strong>
+                                    <span>Jour et nuit</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="hero-feature">
+                                <span class="icon-circle"><i class="bi bi-bell"></i></span>
+                                <div>
+                                    <strong>Détection de mouvement</strong>
+                                    <span>Alertes en temps réel</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="hero-feature">
+                                <span class="icon-circle"><i class="bi bi-mic"></i></span>
+                                <div>
+                                    <strong>Communication bidirectionnelle</strong>
+                                    <span>Parlez et écoutez</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="hero-feature">
+                                <span class="icon-circle"><i class="bi bi-phone"></i></span>
+                                <div>
+                                    <strong>Accès à distance</strong>
+                                    <span>Depuis votre smartphone</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex flex-wrap gap-3">
                         <a href="https://wa.me/{{ whatsapp_number }}?text={{ whatsapp_message_defaut|url_encode }}"
-                           target="_blank" rel="noopener" class="btn-whatsapp btn-whatsapp--lg">
+                           target="_blank" rel="noopener" class="btn-pill btn-pill--lg">
                             {{ include('partials/_icone_whatsapp.html.twig') }}
                             Discuter sur WhatsApp
                         </a>
-                        <a href="{{ path('app_produits') }}" class="btn-outline-primary-custom">
-                            Voir les modèles
+                        <a href="{{ path('app_produits') }}" class="btn-outline-light-custom">
+                            Voir nos produits
                         </a>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="hero-image-wrapper text-center">
-                        <img src="{{ asset('images/hero-sonnette.svg') }}" alt="Sonnette vidéo connectée" class="img-fluid" style="max-width: 380px;">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    {# ==================== POURQUOI NOUS CHOISIR ==================== #}
-    <section class="section">
-        <div class="container">
-            <div class="section-title">
-                <h2>Pourquoi nous choisir</h2>
-                <p>Une installation sans mauvaise surprise, pensée pour votre tranquillité.</p>
-            </div>
-            <div class="row g-4">
-                <div class="col-md-6 col-lg-3">
-                    <div class="feature-card">
-                        <div class="icon-circle">💳</div>
-                        <h3>Paiement après installation</h3>
-                        <p>Aucun acompte demandé. Vous réglez uniquement une fois la sonnette installée et testée.</p>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="feature-card">
-                        <div class="icon-circle">🛠️</div>
-                        <h3>Installation pro incluse</h3>
-                        <p>Un technicien se déplace chez vous et configure entièrement votre appareil.</p>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="feature-card">
-                        <div class="icon-circle">📱</div>
-                        <h3>Même quand vous êtes absent</h3>
-                        <p>Voyez et parlez à vos visiteurs depuis votre smartphone, où que vous soyez.</p>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="feature-card">
-                        <div class="icon-circle">🚫</div>
-                        <h3>Sans abonnement possible</h3>
-                        <p>Des modèles avec stockage local, sans frais mensuels obligatoires.</p>
                     </div>
                 </div>
             </div>
@@ -77,11 +71,12 @@
     </section>
 
     {# ==================== NOS PRODUITS ==================== #}
-    <section class="section bg-alt">
+    <section class="section bg-white">
         <div class="container">
             <div class="section-title">
-                <h2>Nos produits</h2>
-                <p>Une sélection de sonnettes vidéo connectées, installées et configurées pour vous.</p>
+                <span class="section-eyebrow">Nos produits</span>
+                <h2>{{ produits_vedette|length }} modèle{{ produits_vedette|length > 1 ? 's' }} pour répondre à tous vos besoins</h2>
+                <p>Choisissez la sonnette connectée qui vous convient. Tous nos modèles sont livrés avec une installation professionnelle et une configuration complète.</p>
             </div>
 
             {% if produits_vedette is empty %}
@@ -89,22 +84,79 @@
             {% else %}
                 <div class="row g-4">
                     {% for produit in produits_vedette %}
-                        {{ include('partials/_carte_produit.html.twig', { produit: produit }) }}
+                        {{ include('partials/_carte_produit.html.twig', { produit: produit, badge: loop.first ? 'Le plus populaire' : null }) }}
                     {% endfor %}
-                </div>
-                <div class="text-center mt-5">
-                    <a href="{{ path('app_produits') }}" class="btn-outline-primary-custom">Voir tous les produits</a>
                 </div>
             {% endif %}
         </div>
     </section>
 
-    {# ==================== COMMENT CA MARCHE ==================== #}
-    <section class="section">
+    {# ==================== POURQUOI NOUS CHOISIR ==================== #}
+    <section class="section bg-alt">
         <div class="container">
             <div class="section-title">
-                <h2>Comment ça marche</h2>
-                <p>Trois étapes simples, sans engagement avant l'installation.</p>
+                <span class="section-eyebrow">Pourquoi choisir {{ entreprise_nom }} ?</span>
+                <h2>Une solution complète et sans tracas</h2>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <div class="feature-plain">
+                        <div class="icon-circle"><i class="bi bi-award"></i></div>
+                        <h3>Matériel de qualité</h3>
+                        <p>Des marques fiables et performantes.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="feature-plain">
+                        <div class="icon-circle"><i class="bi bi-tools"></i></div>
+                        <h3>Installation professionnelle</h3>
+                        <p>Par nos techniciens certifiés.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="feature-plain">
+                        <div class="icon-circle"><i class="bi bi-gear"></i></div>
+                        <h3>Configuration incluse</h3>
+                        <p>Application, réseau et réglages.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="feature-plain">
+                        <div class="icon-circle"><i class="bi bi-headset"></i></div>
+                        <h3>Support réactif</h3>
+                        <p>Une équipe à votre écoute.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {# ==================== NOTRE ENGAGEMENT ==================== #}
+    <section class="section">
+        <div class="container">
+            <div class="row g-5 align-items-center">
+                <div class="col-lg-6 engagement-image">
+                    <img src="{{ asset('images/installation-illustration.svg') }}" alt="Installation d'une sonnette connectée par un technicien">
+                </div>
+                <div class="col-lg-6">
+                    <span class="section-eyebrow" style="text-align:left;">Notre engagement</span>
+                    <h2>Une installation simple et rapide</h2>
+                    <p class="text-muted">
+                        Nos techniciens s'occupent de tout : pose de la sonnette, configuration de votre
+                        application et tests de fonctionnement. Vous n'avez rien à gérer, et vous ne payez
+                        qu'une fois l'installation validée.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {# ==================== COMMENT CA MARCHE ==================== #}
+    <section class="section bg-alt">
+        <div class="container">
+            <div class="section-title">
+                <span class="section-eyebrow">Comment ça marche</span>
+                <h2>Trois étapes simples, sans engagement avant l'installation</h2>
             </div>
             <div class="row g-4">
                 <div class="col-md-4">
@@ -132,17 +184,17 @@
         </div>
     </section>
 
-    {# ==================== NEWSLETTER ==================== #}
-    <section class="section bg-alt">
+    {# ==================== BANDEAU CTA FINAL ==================== #}
+    <section class="section">
         <div class="container">
-            <div class="newsletter">
-                <h2>Restez informé de nos nouveaux modèles</h2>
-                <p class="mb-4">Recevez nos offres et nouveautés, sans spam.</p>
-                <form id="newsletter-form" class="d-flex flex-column flex-sm-row gap-3 justify-content-center">
-                    <input type="email" class="form-control" style="max-width: 320px;" placeholder="Votre adresse e-mail" required>
-                    <button type="submit">S'inscrire</button>
-                </form>
-                <p id="newsletter-message" class="mt-3 d-none"></p>
+            <div class="cta-banner text-center">
+                <h2>Prêt à sécuriser votre entrée ?</h2>
+                <p class="mb-4">Discutez avec notre équipe sur WhatsApp pour obtenir un devis personnalisé.</p>
+                <a href="https://wa.me/{{ whatsapp_number }}?text={{ whatsapp_message_defaut|url_encode }}"
+                   target="_blank" rel="noopener" class="btn-whatsapp btn-whatsapp--lg">
+                    {{ include('partials/_icone_whatsapp.html.twig') }}
+                    Discuter sur WhatsApp
+                </a>
             </div>
         </div>
     </section>

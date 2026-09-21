@@ -3,12 +3,12 @@ twig:
     globals:
         # Numéro au format international sans "+" ni espaces (format attendu par wa.me).
         # À remplacer par le vrai numéro de l'entreprise.
-        whatsapp_number: '32470000000'
+        whatsapp_number: '32465404523'
         whatsapp_message_defaut: 'Bonjour, je souhaite installer une sonnette connectée'
         entreprise_nom: 'Sonetto'
         entreprise_email: 'contact@sonetto.be'
-        entreprise_telephone: '+32 470 00 00 00'
-        entreprise_zone: 'Bruxelles et environs (19 communes)'
+        entreprise_telephone: '+32 465 40 45 23'
+        entreprise_zone: 'Bruxelles et environs'
 
 when@test:
     twig:
