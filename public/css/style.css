@@ -420,8 +420,8 @@ a {
 .produit-card__image {
     width: 100%;
     height: 200px;
-    object-fit: cover;
-    background-color: #dbe3ee;
+    object-fit:contain;
+    background-color: white;
 }
 
 .produit-card__body {
@@ -448,6 +448,15 @@ a {
 .produit-card__body h3 {
     font-size: 1.2rem;
     margin-bottom: 0.2rem;
+}
+
+.produit-card__titre-lien {
+    color: var(--color-dark);
+    transition: var(--transition);
+}
+
+.produit-card__titre-lien:hover {
+    color: var(--color-primary);
 }
 
 .produit-card__sous-titre {
@@ -837,6 +846,55 @@ a {
 
 .footer-social a:hover {
     background: var(--color-primary);
+}
+
+/* ---------- Fiche produit détaillée ---------- */
+.page-header__retour {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: rgba(255, 255, 255, 0.75);
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+.page-header__retour:hover {
+    color: #fff;
+}
+
+.produit-carousel {
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+}
+
+.produit-carousel .carousel-item img,
+.produit-carousel--simple img {
+    width: 100%;
+    height: 420px;
+    object-fit: cover;
+    background-color: #dbe3ee;
+}
+
+.produit-carousel .carousel-indicators [data-bs-target] {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background-color: #fff;
+}
+
+.detail-specs {
+    font-size: 0.98rem;
+    margin-bottom: 1.75rem;
+}
+
+.detail-specs li {
+    padding: 0.35rem 0;
+}
+
+.detail-prix-bloc {
+    margin-bottom: 1.5rem;
 }
 
 /* ---------- Page Contact ---------- */

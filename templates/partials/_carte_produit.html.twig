@@ -8,21 +8,29 @@
             <span class="produit-card__badge">{{ badge }}</span>
         {% endif %}
 
-        <img src="{{ produit.image ? asset('images/produits/' ~ produit.image) : asset('images/placeholder-produit.svg') }}"
-             alt="{{ produit.nom }}" class="produit-card__image">
+        <a href="{{ path('app_produit_detail', { id: produit.id }) }}">
+            <img src="{{ produit.imagePrincipale ? asset('images/produits/' ~ produit.imagePrincipale) : asset('images/placeholder-produit.svg') }}"
+                 alt="{{ produit.nom }}" class="produit-card__image">
+        </a>
 
         <div class="produit-card__body">
             <span class="produit-card__categorie">{{ produit.categorie.nom }}</span>
-            <h3>{{ produit.nom }}</h3>
-            {% if produit.resolution %}
-                <p class="produit-card__sous-titre">Caméra {{ produit.resolution }}</p>
+            <h3><a href="{{ path('app_produit_detail', { id: produit.id }) }}" class="produit-card__titre-lien">{{ produit.nom }}</a></h3>
+            {% if produit.sousTitre or produit.resolution %}
+                <p class="produit-card__sous-titre">{{ produit.sousTitre ?: 'Caméra ' ~ produit.resolution }}</p>
             {% endif %}
 
             <ul class="produit-card__specs">
-                {% if produit.autonomie %}<li><i class="bi bi-check-circle-fill"></i> Autonomie : {{ produit.autonomie }}</li>{% endif %}
-                {% if produit.stockage %}<li><i class="bi bi-check-circle-fill"></i> Stockage : {{ produit.stockage }}</li>{% endif %}
-                <li><i class="bi bi-check-circle-fill"></i> Alimentation : {{ produit.alimentation }}</li>
-                <li><i class="bi bi-check-circle-fill"></i> Application mobile incluse</li>
+                {% if produit.pointsForts %}
+                    {% for point in produit.pointsFortsListe %}
+                        <li><i class="bi bi-check-circle-fill"></i> {{ point }}</li>
+                    {% endfor %}
+                {% else %}
+                    {% if produit.autonomie %}<li><i class="bi bi-check-circle-fill"></i> Autonomie : {{ produit.autonomie }}</li>{% endif %}
+                    {% if produit.stockage %}<li><i class="bi bi-check-circle-fill"></i> Stockage : {{ produit.stockage }}</li>{% endif %}
+                    <li><i class="bi bi-check-circle-fill"></i> Alimentation : {{ produit.alimentation }}</li>
+                    <li><i class="bi bi-check-circle-fill"></i> Application mobile incluse</li>
+                {% endif %}
             </ul>
 
             <div class="produit-card__footer">

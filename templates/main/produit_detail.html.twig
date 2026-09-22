@@ -1,0 +1,108 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ produit.nom }} — {{ entreprise_nom }}{% endblock %}
+
+{% block body %}
+
+    <header class="page-header">
+        <div class="container">
+            <a href="{{ path('app_produits') }}" class="page-header__retour">
+                <i class="bi bi-arrow-left"></i> Retour aux produits
+            </a>
+            <h1>{{ produit.nom }}</h1>
+            <p>{{ produit.categorie.nom }}</p>
+        </div>
+    </header>
+
+    <section class="section">
+        <div class="container">
+            <div class="row g-5">
+
+                {# ==================== CARROUSEL PHOTOS ==================== #}
+                <div class="col-lg-6">
+                    {% set images = produit.galerieComplete %}
+                    {% if images|length > 1 %}
+                        <div id="carousel-produit-{{ produit.id }}" class="carousel slide produit-carousel" data-bs-ride="carousel" data-bs-interval="3500">
+                            <div class="carousel-indicators">
+                                {% for img in images %}
+                                    <button type="button" data-bs-target="#carousel-produit-{{ produit.id }}" data-bs-slide-to="{{ loop.index0 }}" class="{{ loop.first ? 'active' }}" aria-current="{{ loop.first ? 'true' }}" aria-label="Photo {{ loop.index }}"></button>
+                                {% endfor %}
+                            </div>
+                            <div class="carousel-inner">
+                                {% for img in images %}
+                                    <div class="carousel-item {{ loop.first ? 'active' }}">
+                                        <img src="{{ asset('images/produits/' ~ img) }}" class="d-block w-100" alt="{{ produit.nom }} — photo {{ loop.index }}">
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carousel-produit-{{ produit.id }}" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Précédent</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carousel-produit-{{ produit.id }}" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Suivant</span>
+                            </button>
+                        </div>
+                    {% else %}
+                        <div class="produit-carousel produit-carousel--simple">
+                            <img src="{{ images[0] is defined ? asset('images/produits/' ~ images[0]) : asset('images/placeholder-produit.svg') }}"
+                                 class="d-block w-100" alt="{{ produit.nom }}">
+                        </div>
+                    {% endif %}
+                </div>
+
+                {# ==================== INFOS PRODUIT ==================== #}
+                <div class="col-lg-6">
+                    <span class="produit-card__categorie">{{ produit.categorie.nom }}</span>
+                    <h2 class="mt-2">{{ produit.nom }}</h2>
+                    {% if produit.sousTitre or produit.resolution %}
+                        <p class="produit-card__sous-titre fs-6">{{ produit.sousTitre ?: 'Caméra ' ~ produit.resolution }}</p>
+                    {% endif %}
+
+                    {% if produit.description %}
+                        <p class="text-muted">{{ produit.description }}</p>
+                    {% endif %}
+
+                    <ul class="produit-card__specs detail-specs">
+                        {% if produit.pointsForts %}
+                            {% for point in produit.pointsFortsListe %}
+                                <li><i class="bi bi-check-circle-fill"></i> {{ point }}</li>
+                            {% endfor %}
+                        {% else %}
+                            {% if produit.autonomie %}<li><i class="bi bi-check-circle-fill"></i> Autonomie : {{ produit.autonomie }}</li>{% endif %}
+                            {% if produit.stockage %}<li><i class="bi bi-check-circle-fill"></i> Stockage : {{ produit.stockage }}</li>{% endif %}
+                            <li><i class="bi bi-check-circle-fill"></i> Alimentation : {{ produit.alimentation }}</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Application mobile incluse</li>
+                        {% endif %}
+                    </ul>
+
+                    <div class="detail-prix-bloc">
+                        <div class="produit-card__prix">{{ produit.prix|number_format(0, ',', ' ') }} €</div>
+                        <span class="produit-card__prix-note">Installation + configuration incluses</span>
+                    </div>
+
+                    <a href="https://wa.me/{{ whatsapp_number }}?text={{ ('Bonjour, je souhaite installer la sonnette ' ~ produit.nom)|url_encode }}"
+                       target="_blank" rel="noopener" class="btn-pill btn-pill--lg">
+                        {{ include('partials/_icone_whatsapp.html.twig') }}
+                        Choisir cette offre <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            {# ==================== PRODUITS SIMILAIRES ==================== #}
+            {% if produits_similaires|length > 0 %}
+                <div class="section-title mt-5 pt-4">
+                    <span class="section-eyebrow">Vous aimerez aussi</span>
+                    <h2>Produits similaires</h2>
+                </div>
+                <div class="row g-4">
+                    {% for autre in produits_similaires %}
+                        {{ include('partials/_carte_produit.html.twig', { produit: autre }) }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    </section>
+
+{% endblock %}

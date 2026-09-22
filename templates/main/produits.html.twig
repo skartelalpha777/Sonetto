@@ -26,7 +26,7 @@
 
             {# ==================== GRILLE PRODUITS ==================== #}
             {% if produits is empty %}
-                <p class="text-center text-muted">Aucun produit publié pour le moment. Ajoutez-en depuis l'espace <a href="{{ path('app_produit_index') }}">administration</a>.</p>
+                <p class="text-center text-muted">Aucun produit publié pour le moment. Ajoutez-en depuis l'espace <a href="{{ path('admin') }}">administration</a>.</p>
             {% else %}
                 <div class="row g-4">
                     {% for produit in produits %}

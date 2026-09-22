@@ -1,0 +1,27 @@
+{% extends 'security/_layout.html.twig' %}
+
+{% block title %}Nouveau mot de passe — Administration {{ entreprise_nom }}{% endblock %}
+
+{% block card_content %}
+    <h1>Choisir un nouveau mot de passe</h1>
+
+    {% for message in app.flashes('reset_password_error') %}
+        <div class="alert alert-danger">{{ message }}</div>
+    {% endfor %}
+
+    {{ form_start(resetForm) }}
+        {{ form_errors(resetForm) }}
+        <div class="mb-3">
+            {{ form_label(resetForm.plainPassword.first, null, {label_attr: {class: 'form-label'}}) }}
+            {{ form_widget(resetForm.plainPassword.first, {attr: {class: 'form-control'}}) }}
+            {{ form_errors(resetForm.plainPassword.first) }}
+        </div>
+        <div class="mb-3">
+            {{ form_label(resetForm.plainPassword.second, null, {label_attr: {class: 'form-label'}}) }}
+            {{ form_widget(resetForm.plainPassword.second, {attr: {class: 'form-control'}}) }}
+            {{ form_errors(resetForm.plainPassword.second) }}
+        </div>
+
+        <button class="btn-pill btn-pill--block" type="submit">Changer le mot de passe</button>
+    {{ form_end(resetForm) }}
+{% endblock %}

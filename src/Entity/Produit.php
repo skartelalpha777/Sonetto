@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ProduitRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -23,8 +25,32 @@ class Produit
     #[ORM\Column]
     private ?float $prix = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $image = null;
+    /**
+     * Toutes les photos du produit (table dédiée image_produit), y compris la
+     * photo principale (celle avec isMain = true). Triée pour que la photo
+     * principale arrive toujours en premier, ce qui sert à la fois de photo
+     * de carte ET de première image du carrousel de la fiche produit.
+     *
+     * @var Collection<int, ImageProduit>
+     */
+    #[ORM\OneToMany(targetEntity: ImageProduit::class, mappedBy: 'produit', cascade: ['persist', 'remove'], orphanRemoval: true)]
+    #[ORM\OrderBy(['isMain' => 'DESC', 'position' => 'ASC'])]
+    private Collection $images;
+
+    /**
+     * Sous-titre affiché sous le nom du produit. Si vide, la carte affiche
+     * automatiquement "Caméra {resolution}".
+     */
+    #[ORM\Column(length: 180, nullable: true)]
+    private ?string $sousTitre = null;
+
+    /**
+     * Points forts marketing (une phrase par ligne, affichés avec une coche
+     * verte). Si vide, la carte retombe sur les champs techniques classiques
+     * (autonomie / stockage / alimentation).
+     */
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $pointsForts = null;
 
     #[ORM\ManyToOne(inversedBy: 'produits')]
     #[ORM\JoinColumn(nullable: false)]
@@ -51,6 +77,7 @@ class Produit
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable();
+        $this->images = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -94,16 +121,99 @@ class Produit
         return $this;
     }
 
-    public function getImage(): ?string
+    /**
+     * @return Collection<int, ImageProduit>
+     */
+    public function getImages(): Collection
     {
-        return $this->image;
+        return $this->images;
     }
 
-    public function setImage(?string $image): static
+    public function addImage(ImageProduit $image): static
     {
-        $this->image = $image;
+        if (!$this->images->contains($image)) {
+            $this->images->add($image);
+            $image->setProduit($this);
+        }
 
         return $this;
+    }
+
+    public function removeImage(ImageProduit $image): static
+    {
+        if ($this->images->removeElement($image)) {
+            if ($image->getProduit() === $this) {
+                $image->setProduit(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return string[] Noms de fichiers de toutes les photos, photo principale en premier.
+     */
+    public function getGalerieComplete(): array
+    {
+        return array_map(
+            fn (ImageProduit $image) => $image->getNomFichier(),
+            $this->images->toArray()
+        );
+    }
+
+    /**
+     * Photo à afficher sur la carte produit (celle marquée "principale",
+     * ou la première de la galerie à défaut).
+     */
+    public function getImagePrincipale(): ?string
+    {
+        $premiere = $this->images->first();
+
+        return $premiere ? $premiere->getNomFichier() : null;
+    }
+
+    public function getSousTitre(): ?string
+    {
+        return $this->sousTitre;
+    }
+
+    public function setSousTitre(?string $sousTitre): static
+    {
+        $this->sousTitre = $sousTitre;
+
+        return $this;
+    }
+
+    public function getPointsForts(): ?string
+    {
+        return $this->pointsForts;
+    }
+
+    public function setPointsForts(?string $pointsForts): static
+    {
+        $this->pointsForts = $pointsForts;
+
+        return $this;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getPointsFortsListe(): array
+    {
+        if (!$this->pointsForts) {
+            return [];
+        }
+
+        $points = [];
+        foreach (preg_split('/\r\n|\r|\n/', trim($this->pointsForts)) as $ligne) {
+            $ligne = trim($ligne);
+            if ($ligne !== '') {
+                $points[] = $ligne;
+            }
+        }
+
+        return $points;
     }
 
     public function getCategorie(): ?Categorie

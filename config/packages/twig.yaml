@@ -6,9 +6,9 @@ twig:
         whatsapp_number: '32465404523'
         whatsapp_message_defaut: 'Bonjour, je souhaite installer une sonnette connectée'
         entreprise_nom: 'Sonetto'
-        entreprise_email: 'contact@sonetto.be'
+        entreprise_email: 'contact.sonetto@gmail.com'
         entreprise_telephone: '+32 465 40 45 23'
-        entreprise_zone: 'Bruxelles et environs'
+        entreprise_zone: 'Bruxelles et les villes environnantes'
 
 when@test:
     twig:
