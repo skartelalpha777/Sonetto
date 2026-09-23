@@ -12,7 +12,7 @@
 
         <a href="{{ path('app_produit_detail', { id: produit.id }) }}">
             <img src="{{ produit.imagePrincipale ? asset('images/produits/' ~ produit.imagePrincipale) : asset('images/placeholder-produit.svg') }}"
-                 alt="{{ produit.nom }}" class="produit-card__image">
+                 alt="{{ produit.nom }}" class="produit-card__image" loading="lazy">
         </a>
 
         <div class="produit-card__body">

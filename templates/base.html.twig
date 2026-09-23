@@ -5,13 +5,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}{{ entreprise_nom }} | Sonnettes vidéo connectées{% endblock %}</title>
     <meta name="description" content="{% block meta_description %}Vente, installation et configuration de sonnettes vidéo connectées à Bruxelles. Payez seulement après installation.{% endblock %}">
+
+    {# URL canonique : évite les problèmes de contenu dupliqué (ex: mêmes pages
+       accessibles avec ou sans paramètres de tracking). #}
+    <link rel="canonical" href="{{ url(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) }}">
     <link rel="icon" href="{{ asset('images/logo.svg') }}">
+
+    {# Open Graph / Twitter Card : aperçu soigné quand le site est partagé
+       (WhatsApp, Facebook, etc.). Réutilise les blocks title/meta_description
+       ci-dessus, sauf si une page les redéfinit spécifiquement (og_image). #}
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="{{ entreprise_nom }}">
+    <meta property="og:locale" content="fr_BE">
+    <meta property="og:url" content="{{ url(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) }}">
+    <meta property="og:title" content="{{ block('title') }}">
+    <meta property="og:description" content="{{ block('meta_description') }}">
+    <meta property="og:image" content="{% block og_image %}{{ absolute_url(asset('images/hero-photo.jpg')) }}{% endblock %}">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ block('title') }}">
+    <meta name="twitter:description" content="{{ block('meta_description') }}">
+    <meta name="twitter:image" content="{{ block('og_image') }}">
 
     {# Bootstrap : uniquement pour la grille/flexbox (container, row, col-*, d-flex...) #}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     {# Notre design (couleurs, cartes, navbar, footer, hero...) #}
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+
+    {# Données structurées (JSON-LD) : aide Google à comprendre qu'il s'agit
+       d'une entreprise locale (adresse, téléphone, zone desservie), utile
+       pour apparaître dans les résultats de recherche locaux ("sonnette
+       connectée Bruxelles") et sur Google Maps. #}
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ElectronicsStore",
+        "name": {{ entreprise_nom|json_encode|raw }},
+        "url": {{ url('app_accueil')|json_encode|raw }},
+        "email": {{ entreprise_email|json_encode|raw }},
+        "telephone": {{ entreprise_telephone|json_encode|raw }},
+        "image": {{ absolute_url(asset('images/logo.svg'))|json_encode|raw }},
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Bruxelles",
+            "addressCountry": "BE"
+        },
+        "areaServed": {{ entreprise_zone|json_encode|raw }}
+    }
+    </script>
 
     {% block stylesheets %}{% endblock %}
 </head>
@@ -60,7 +101,7 @@
 {% block body %}{% endblock %}
 
 {# ==================== FOOTER (identique sur toutes les pages) ==================== #}
-<footer class="footer">
+<footer class="footer mt-0">
     <div class="container">
 
         <div class="footer-badges">
@@ -87,7 +128,7 @@
         </div>
 
         <div class="row g-4 py-5">
-            <div class="col-lg-4 col-md-6">
+            <div class="col-6 col-lg-4">
                 <div class="footer-brand mb-3">
                     <img src="{{ asset('images/logo-blanc.svg') }}" alt="{{ entreprise_nom }}" height="46">
                 </div>
@@ -98,20 +139,20 @@
                     <a href="https://wa.me/{{ whatsapp_number }}" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
                 </div>
             </div>
-            <div class="col-lg-2 col-md-6">
+            <div class="col-6 col-lg-2">
                 <h4>Navigation</h4>
                 <a href="{{ path('app_accueil') }}">Accueil</a>
                 <a href="{{ path('app_apropos') }}">À propos</a>
                 <a href="{{ path('app_produits') }}">Produits</a>
                 <a href="{{ path('app_contact') }}">Contact</a>
             </div>
-            <div class="col-lg-3 col-md-6">
+            <div class="col-6 col-lg-3">
                 <h4>Aide</h4>
                 <a href="{{ path('app_contact') }}">Zone de couverture</a>
                 <a href="{{ path('app_apropos') }}">Comment ça marche</a>
                 <a href="#">Questions fréquentes</a>
             </div>
-            <div class="col-lg-3 col-md-6">
+            <div class="col-6 col-lg-3">
                 <h4>Contact</h4>
                 <a href="mailto:{{ entreprise_email }}">{{ entreprise_email }}</a>
                 <a href="tel:{{ entreprise_telephone|replace({' ': ''}) }}">{{ entreprise_telephone }}</a>

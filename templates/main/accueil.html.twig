@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ entreprise_nom }} — Sonnettes vidéo connectées à Bruxelles{% endblock %}
+{% block title %}{{ entreprise_nom }} | Sonnettes vidéo connectées{% endblock %}
+{% block meta_description %}Vente et installation de sonnettes vidéo connectées à Bruxelles : caméra, détection intelligente, carillon. Payez seulement après installation, sans acompte.{% endblock %}
 
 {% block body %}
 
@@ -84,7 +85,7 @@
             {% else %}
                 <div class="row g-4">
                     {% for produit in produits_vedette %}
-                        {{ include('partials/_carte_produit.html.twig', { produit: produit, badge: loop.first ? 'Le plus populaire' : null }) }}
+                        {{ include('partials/_carte_produit.html.twig', { produit: produit, badge: loop.index == 2 ? 'Le plus populaire' : null }) }}
                     {% endfor %}
                 </div>
             {% endif %}

@@ -815,7 +815,7 @@ a {
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     padding: 2rem 0;
-    margin: 2.5rem 0 0;
+   
 }
 
 .footer-badge {
@@ -1094,5 +1094,17 @@ a {
     .newsletter,
     .cta-banner {
         padding: 2rem 1.25rem;
+    }
+
+    /* Footer mobile : grille 2 colonnes (gauche/droite) au lieu d'un
+       empilement des 4 blocs en une seule colonne, pour réduire la hauteur.
+       Le HTML passe déjà en col-6 ; ici on ajuste juste les détails visuels. */
+    .footer-brand,
+    .footer-social {
+        display: flex;
+    }
+
+    .footer-social a {
+        margin-right: 0.5rem;
     }
 }
