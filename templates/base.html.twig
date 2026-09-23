@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{% block title %}{{ entreprise_nom }} — Sonnettes vidéo connectées à Bruxelles{% endblock %}</title>
+    <title>{% block title %}{{ entreprise_nom }} | Sonnettes vidéo connectées{% endblock %}</title>
     <meta name="description" content="{% block meta_description %}Vente, installation et configuration de sonnettes vidéo connectées à Bruxelles. Payez seulement après installation.{% endblock %}">
     <link rel="icon" href="{{ asset('images/logo.svg') }}">
 
@@ -38,17 +38,8 @@
                 <li class="nav-item">
                     <a class="nav-link {{ app.request.attributes.get('_route') == 'app_apropos' ? 'active' }}" href="{{ path('app_apropos') }}">À propos</a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle {{ app.request.attributes.get('_route') == 'app_produits' ? 'active' }}"
-                       href="{{ path('app_produits') }}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Nos produits
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="{{ path('app_produits') }}">Tous les produits</a></li>
-                        {% for categorie in categories_menu %}
-                            <li><a class="dropdown-item" href="{{ path('app_produits') }}#categorie-{{ categorie.id }}">{{ categorie.nom }}</a></li>
-                        {% endfor %}
-                    </ul>
+                <li class="nav-item">
+                    <a class="nav-link {{ app.request.attributes.get('_route') == 'app_produits' ? 'active' }}" href="{{ path('app_produits') }}">Produits</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ app.request.attributes.get('_route') == 'app_contact' ? 'active' }}" href="{{ path('app_contact') }}">Contact</a>

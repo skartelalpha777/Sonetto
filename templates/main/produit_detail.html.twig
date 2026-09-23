@@ -55,6 +55,9 @@
                 {# ==================== INFOS PRODUIT ==================== #}
                 <div class="col-lg-6">
                     <span class="produit-card__categorie">{{ produit.categorie.nom }}</span>
+                    {% if produit.aVenir %}
+                        <span class="produit-card__badge produit-card__badge--venir produit-card__badge--inline">Produit à venir</span>
+                    {% endif %}
                     <h2 class="mt-2">{{ produit.nom }}</h2>
                     {% if produit.sousTitre or produit.resolution %}
                         <p class="produit-card__sous-titre fs-6">{{ produit.sousTitre ?: 'Caméra ' ~ produit.resolution }}</p>
@@ -64,9 +67,18 @@
                         <p class="text-muted">{{ produit.description }}</p>
                     {% endif %}
 
+                    {% if produit.avertissement %}
+                        {# |raw : ce champ n'est modifiable que depuis l'admin (contenu de confiance),
+                           ce qui permet d'y inclure des liens <a> vers d'autres produits. #}
+                        <div class="produit-avertissement">
+                            <i class="bi bi-exclamation-triangle-fill"></i>
+                            <span>{{ produit.avertissement|raw }}</span>
+                        </div>
+                    {% endif %}
+
                     <ul class="produit-card__specs detail-specs">
                         {% if produit.pointsForts %}
-                            {% for point in produit.pointsFortsListe %}
+                            {% for point in produit.pointsFortsCompletListe %}
                                 <li><i class="bi bi-check-circle-fill"></i> {{ point }}</li>
                             {% endfor %}
                         {% else %}

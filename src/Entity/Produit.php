@@ -46,11 +46,36 @@ class Produit
 
     /**
      * Points forts marketing (une phrase par ligne, affichés avec une coche
-     * verte). Si vide, la carte retombe sur les champs techniques classiques
+     * verte) affichés à la fois sur la carte produit ET la fiche détaillée.
+     * Si vide, la carte retombe sur les champs techniques classiques
      * (autonomie / stockage / alimentation).
      */
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $pointsForts = null;
+
+    /**
+     * Points forts propres à la fiche détaillée (une phrase par ligne). Si
+     * rempli, remplace complètement la liste "pointsForts" sur la fiche
+     * détail (la carte produit garde, elle, sa propre liste "pointsForts").
+     * Permet d'avoir un contenu différent entre la carte et la fiche détail.
+     */
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $pointsFortsDetail = null;
+
+    /**
+     * Avertissement affiché uniquement sur la fiche détaillée, dans un encart
+     * distinct (orange) juste après la description. Laisser vide si aucun
+     * avertissement n'est nécessaire pour ce produit.
+     */
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $avertissement = null;
+
+    /**
+     * Si vrai, un badge "Produit à venir" s'affiche sur la carte et la fiche
+     * détaillée, à la place du badge "Le plus populaire" éventuel.
+     */
+    #[ORM\Column]
+    private bool $aVenir = false;
 
     #[ORM\ManyToOne(inversedBy: 'produits')]
     #[ORM\JoinColumn(nullable: false)]
@@ -214,6 +239,77 @@ class Produit
         }
 
         return $points;
+    }
+
+    public function getPointsFortsDetail(): ?string
+    {
+        return $this->pointsFortsDetail;
+    }
+
+    public function setPointsFortsDetail(?string $pointsFortsDetail): static
+    {
+        $this->pointsFortsDetail = $pointsFortsDetail;
+
+        return $this;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getPointsFortsDetailListe(): array
+    {
+        if (!$this->pointsFortsDetail) {
+            return [];
+        }
+
+        $points = [];
+        foreach (preg_split('/\r\n|\r|\n/', trim($this->pointsFortsDetail)) as $ligne) {
+            $ligne = trim($ligne);
+            if ($ligne !== '') {
+                $points[] = $ligne;
+            }
+        }
+
+        return $points;
+    }
+
+    /**
+     * Liste de points forts à afficher sur la fiche détaillée. Si
+     * pointsFortsDetail est rempli, il remplace complètement la liste de la
+     * carte (contenu indépendant, propre à la fiche détail). Sinon, la fiche
+     * détail reprend simplement la même liste que la carte.
+     *
+     * @return string[]
+     */
+    public function getPointsFortsCompletListe(): array
+    {
+        $detail = $this->getPointsFortsDetailListe();
+
+        return $detail !== [] ? $detail : $this->getPointsFortsListe();
+    }
+
+    public function getAvertissement(): ?string
+    {
+        return $this->avertissement;
+    }
+
+    public function setAvertissement(?string $avertissement): static
+    {
+        $this->avertissement = $avertissement;
+
+        return $this;
+    }
+
+    public function isAVenir(): bool
+    {
+        return $this->aVenir;
+    }
+
+    public function setAVenir(bool $aVenir): static
+    {
+        $this->aVenir = $aVenir;
+
+        return $this;
     }
 
     public function getCategorie(): ?Categorie

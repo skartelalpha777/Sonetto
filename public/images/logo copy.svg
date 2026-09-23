@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 92" width="255" height="69">
+  <!-- Icône : anneaux concentriques façon empreinte/signal, convergeant vers un objectif de caméra -->
+  <g fill="none" stroke-linecap="round">
+    <circle cx="40" cy="46" r="32" stroke="#0b1e3d" stroke-width="4.2" stroke-dasharray="145.3 55.8" transform="rotate(0 40 46)"/>
+    <circle cx="40" cy="46" r="25" stroke="#1d4ed8" stroke-width="4.2" stroke-dasharray="113.5 43.6" transform="rotate(85 40 46)"/>
+    <circle cx="40" cy="46" r="18" stroke="#2563eb" stroke-width="4.2" stroke-dasharray="81.7 31.4" transform="rotate(170 40 46)"/>
+    <circle cx="40" cy="46" r="11" stroke="#60a5fa" stroke-width="4.2" stroke-dasharray="49.9 19.2" transform="rotate(255 40 46)"/>
+  </g>
+  <!-- Objectif (lentille) -->
+  <circle cx="40" cy="46" r="6.5" fill="#0b1e3d"/>
+  <circle cx="37.8" cy="43.8" r="1.9" fill="#ffffff"/>
+
+  <!-- Wordmark -->
+  <text x="95" y="52" font-family="Segoe UI, Arial, sans-serif" font-size="37" font-weight="900" letter-spacing="0.5">
+    <tspan fill="#0b1e3d">S</tspan><tspan fill="#2563eb">O</tspan><tspan fill="#0b1e3d">NETTO</tspan>
+  </text>
+  <text x="96" y="75" font-family="Segoe UI, Arial, sans-serif" font-size="13.5" font-weight="700" letter-spacing="2" fill="#64748b">SONNETTES VIDÉO CONNECTÉES</text>
+</svg>

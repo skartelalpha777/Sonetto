@@ -16,7 +16,8 @@
     --color-primary-light: #60a5fa;
     --color-accent: #22c55e;
     /* vert — garantie / validation / badges de confiance */
-    --color-whatsapp:  #1677FF;;
+    --color-whatsapp: #1677FF;
+    ;
     /* vert officiel WhatsApp — CTA du bandeau final */
     --color-whatsapp-dark: #1ebe5d;
     --color-bg: #ffffff;
@@ -417,10 +418,23 @@ a {
     letter-spacing: 0.03em;
 }
 
+.produit-card__badge--venir {
+    background: #f97316;
+}
+
+/* Sur la fiche détail, le badge n'est pas positionné en absolu sur une image :
+   il s'affiche en ligne, juste à côté du badge de catégorie. */
+.produit-card__badge--inline {
+    position: static;
+    display: inline-block;
+    margin-left: 0.5rem;
+    vertical-align: middle;
+}
+
 .produit-card__image {
     width: 100%;
     height: 200px;
-    object-fit:contain;
+    object-fit: contain;
     background-color: white;
 }
 
@@ -873,8 +887,8 @@ a {
 .produit-carousel--simple img {
     width: 100%;
     height: 420px;
-    object-fit: cover;
-    background-color: #dbe3ee;
+    object-fit:contain;
+    background-color: white;
 }
 
 .produit-carousel .carousel-indicators [data-bs-target] {
@@ -882,6 +896,76 @@ a {
     height: 9px;
     border-radius: 50%;
     background-color: #fff;
+    border: 1px solid rgba(11, 30, 61, 0.3);
+}
+
+/* Fond rond sur les flèches précédent/suivant : sans ça elles sont blanches
+   et invisibles sur le fond blanc du carrousel. */
+.produit-carousel .carousel-control-prev,
+.produit-carousel .carousel-control-next {
+    top: 50%;
+    bottom: auto;
+    width: 46px;
+    height: 46px;
+    transform: translateY(-50%);
+    background-color: var(--color-dark);
+    border-radius: 50%;
+    opacity: 0.85;
+    transition: var(--transition);
+}
+
+.produit-carousel .carousel-control-prev {
+    left: 16px;
+}
+
+.produit-carousel .carousel-control-next {
+    right: 16px;
+}
+
+.produit-carousel .carousel-control-prev:hover,
+.produit-carousel .carousel-control-next:hover {
+    background-color: var(--color-primary);
+    opacity: 1;
+}
+
+.produit-carousel .carousel-control-prev-icon,
+.produit-carousel .carousel-control-next-icon {
+    width: 18px;
+    height: 18px;
+}
+
+/* Encart d'avertissement sur la fiche détail (ex: fonctionnalité manquante,
+   accessoire nécessaire en plus). Volontairement distinct des points forts
+   (fond orange pâle) pour ne pas être confondu avec un argument positif. */
+.produit-avertissement {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.65rem;
+    background: #fff7ed;
+    border: 1px solid #fdba74;
+    border-left: 4px solid #f97316;
+    border-radius: var(--radius-sm);
+    padding: 0.9rem 1.1rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.92rem;
+    color: #9a3412;
+}
+
+.produit-avertissement i {
+    color: #f97316;
+    font-size: 1.1rem;
+    margin-top: 0.1rem;
+    flex-shrink: 0;
+}
+
+.produit-avertissement a {
+    color: #9a3412;
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+.produit-avertissement a:hover {
+    color: #7c2d12;
 }
 
 .detail-specs {
@@ -965,7 +1049,8 @@ a {
     justify-content: center;
     box-shadow: var(--shadow-md);
 }
-.whatsapp-float:hover{
+
+.whatsapp-float:hover {
     background: #1ebe5d;
 }
 

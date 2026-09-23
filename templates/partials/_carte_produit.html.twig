@@ -4,7 +4,9 @@
    - badge (texte optionnel, ex: "Le plus populaire") #}
 <div class="col-md-6 col-lg-4 produit-card-col" data-categorie="{{ produit.categorie.id }}">
     <div class="produit-card">
-        {% if badge is defined and badge %}
+        {% if produit.aVenir %}
+            <span class="produit-card__badge produit-card__badge--venir">Produit à venir</span>
+        {% elseif badge is defined and badge %}
             <span class="produit-card__badge">{{ badge }}</span>
         {% endif %}
 
