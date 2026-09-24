@@ -47,6 +47,9 @@
             "./config/routes/easyadmin.yaml"
         ]
     },
+    "knplabs/doctrine-behaviors": {
+        "version": "v3.1.0"
+    },
     "symfony/asset-mapper": {
         "version": "7.4",
         "recipe": {

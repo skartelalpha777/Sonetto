@@ -35,6 +35,8 @@ final class SeoController extends AbstractController
     #[Route('/sitemap.xml', name: 'app_sitemap', methods: ['GET'])]
     public function sitemap(ProduitRepository $produitRepository, UrlGeneratorInterface $urlGenerator): Response
     {
+        $locales = ['fr', 'en', 'es', 'nl'];
+
         $pages = [
             ['route' => 'app_accueil', 'priority' => '1.0'],
             ['route' => 'app_produits', 'priority' => '0.9'],
@@ -43,18 +45,20 @@ final class SeoController extends AbstractController
         ];
 
         $urls = [];
-        foreach ($pages as $page) {
-            $urls[] = [
-                'loc' => $urlGenerator->generate($page['route'], [], UrlGeneratorInterface::ABSOLUTE_URL),
-                'priority' => $page['priority'],
-            ];
-        }
+        foreach ($locales as $locale) {
+            foreach ($pages as $page) {
+                $urls[] = [
+                    'loc' => $urlGenerator->generate($page['route'], ['_locale' => $locale], UrlGeneratorInterface::ABSOLUTE_URL),
+                    'priority' => $page['priority'],
+                ];
+            }
 
-        foreach ($produitRepository->findActifs() as $produit) {
-            $urls[] = [
-                'loc' => $urlGenerator->generate('app_produit_detail', ['id' => $produit->getId()], UrlGeneratorInterface::ABSOLUTE_URL),
-                'priority' => '0.8',
-            ];
+            foreach ($produitRepository->findActifs() as $produit) {
+                $urls[] = [
+                    'loc' => $urlGenerator->generate('app_produit_detail', ['_locale' => $locale, 'id' => $produit->getId()], UrlGeneratorInterface::ABSOLUTE_URL),
+                    'priority' => '0.8',
+                ];
+            }
         }
 
         $xml = new \SimpleXMLElement('<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"></urlset>');

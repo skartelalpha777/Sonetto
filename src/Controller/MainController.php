@@ -11,10 +11,15 @@ use Symfony\Component\Routing\Attribute\Route;
 
 /**
  * Pages publiques du site vitrine (l'administration se fait via EasyAdmin, voir src/Controller/Admin/).
+ *
+ * Toutes les routes sont préfixées par /{_locale} (fr|en|es|nl) : chaque langue a sa
+ * propre URL, indexable séparément par Google (contrairement à l'ancien système par
+ * session, où toutes les langues partageaient la même URL).
  */
+#[Route('/{_locale}', requirements: ['_locale' => 'fr|en|es|nl'])]
 final class MainController extends AbstractController
 {
-    #[Route('/', name: 'app_accueil', methods: ['GET'])]
+    #[Route('', name: 'app_accueil', methods: ['GET'])]
     public function accueil(ProduitRepository $produitRepository, CategorieRepository $categorieRepository): Response
     {
         $produitsActifs = $produitRepository->findActifs();

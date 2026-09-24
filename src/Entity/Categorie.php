@@ -5,12 +5,15 @@ namespace App\Entity;
 use App\Repository\CategorieRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Knp\DoctrineBehaviors\Contract\Entity\TranslatableInterface;
+use Knp\DoctrineBehaviors\Model\Translatable\TranslatableTrait;
 
 #[ORM\Entity(repositoryClass: CategorieRepository::class)]
-class Categorie
+class Categorie implements TranslatableInterface
 {
+    use TranslatableTrait;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -45,6 +48,17 @@ class Categorie
         $this->nom = $nom;
 
         return $this;
+    }
+
+    /**
+     * Nom dans la langue demandée si une traduction existe, sinon retombe
+     * sur le nom français (champ par défaut de l'entité).
+     */
+    public function getTranslatedNom(string $locale): ?string
+    {
+        $nom = $this->translate($locale, false)->getNom();
+
+        return ($nom !== null && $nom !== '') ? $nom : $this->nom;
     }
 
     /**

@@ -38,7 +38,7 @@
                 <i class="bi bi-arrow-left"></i> {% trans %}Retour aux produits{% endtrans %}
             </a>
             <h1>{{ produit.nom }}</h1>
-            <p>{{ produit.categorie.nom }}</p>
+            <p>{{ produit.categorie.getTranslatedNom(app.request.locale) }}</p>
         </div>
     </header>
 
@@ -86,17 +86,17 @@
 
                 {# ==================== INFOS PRODUIT ==================== #}
                 <div class="col-lg-6">
-                    <span class="produit-card__categorie">{{ produit.categorie.nom }}</span>
+                    <span class="produit-card__categorie">{{ produit.categorie.getTranslatedNom(app.request.locale) }}</span>
                     {% if produit.aVenir %}
                         <span class="produit-card__badge produit-card__badge--venir produit-card__badge--inline">{% trans %}Produit à venir{% endtrans %}</span>
                     {% endif %}
                     <h2 class="mt-2">{{ produit.nom }}</h2>
                     {% if produit.sousTitre or produit.resolution %}
-                        <p class="produit-card__sous-titre fs-6">{{ produit.sousTitre ?: (('Caméra %res%')|trans({'%res%': produit.resolution})) }}</p>
+                        <p class="produit-card__sous-titre fs-6">{{ produit.getTranslatedSousTitre(app.request.locale) ?: (('Caméra %res%')|trans({'%res%': produit.resolution})) }}</p>
                     {% endif %}
 
                     {% if produit.description %}
-                        <p class="text-muted">{{ produit.description }}</p>
+                        <p class="text-muted">{{ produit.getTranslatedDescription(app.request.locale) }}</p>
                     {% endif %}
 
                     {% if produit.avertissement %}
@@ -104,13 +104,13 @@
                            ce qui permet d'y inclure des liens <a> vers d'autres produits. #}
                         <div class="produit-avertissement">
                             <i class="bi bi-exclamation-triangle-fill"></i>
-                            <span>{{ produit.avertissement|raw }}</span>
+                            <span>{{ produit.getTranslatedAvertissement(app.request.locale)|raw }}</span>
                         </div>
                     {% endif %}
 
                     <ul class="produit-card__specs detail-specs">
                         {% if produit.pointsForts %}
-                            {% for point in produit.pointsFortsCompletListe %}
+                            {% for point in produit.getTranslatedPointsFortsCompletListe(app.request.locale) %}
                                 <li><i class="bi bi-check-circle-fill"></i> {{ point }}</li>
                             {% endfor %}
                         {% else %}

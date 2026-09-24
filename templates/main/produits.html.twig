@@ -20,7 +20,7 @@
                 <div class="filtres-bar d-flex flex-wrap gap-2 justify-content-center">
                     <button type="button" class="filtre-btn active" data-filtre="tous">{% trans %}Tous{% endtrans %}</button>
                     {% for categorie in categories %}
-                        <button type="button" class="filtre-btn" data-filtre="{{ categorie.id }}">{{ categorie.nom }}</button>
+                        <button type="button" class="filtre-btn" data-filtre="{{ categorie.id }}">{{ categorie.getTranslatedNom(app.request.locale) }}</button>
                     {% endfor %}
                 </div>
             {% endif %}

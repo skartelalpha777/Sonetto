@@ -16,15 +16,15 @@
         </a>
 
         <div class="produit-card__body">
-            <span class="produit-card__categorie">{{ produit.categorie.nom }}</span>
+            <span class="produit-card__categorie">{{ produit.categorie.getTranslatedNom(app.request.locale) }}</span>
             <h3><a href="{{ path('app_produit_detail', { id: produit.id }) }}" class="produit-card__titre-lien">{{ produit.nom }}</a></h3>
             {% if produit.sousTitre or produit.resolution %}
-                <p class="produit-card__sous-titre">{{ produit.sousTitre ?: (('Caméra %res%')|trans({'%res%': produit.resolution})) }}</p>
+                <p class="produit-card__sous-titre">{{ produit.getTranslatedSousTitre(app.request.locale) ?: (('Caméra %res%')|trans({'%res%': produit.resolution})) }}</p>
             {% endif %}
 
             <ul class="produit-card__specs">
                 {% if produit.pointsForts %}
-                    {% for point in produit.pointsFortsListe %}
+                    {% for point in produit.getTranslatedPointsFortsListe(app.request.locale) %}
                         <li><i class="bi bi-check-circle-fill"></i> {{ point }}</li>
                     {% endfor %}
                 {% else %}

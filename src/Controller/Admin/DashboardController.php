@@ -81,6 +81,10 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkTo(CategorieCrudController::class, 'Catégories', 'fas fa-tags')->setAction(Action::INDEX);
         yield MenuItem::linkTo(ImageProduitCrudController::class, 'Galerie photos', 'fas fa-images')->setAction(Action::INDEX);
 
+        yield MenuItem::section('Traductions');
+        yield MenuItem::linkTo(ProduitTranslationCrudController::class, 'Traductions de produits', 'fas fa-language')->setAction(Action::INDEX);
+        yield MenuItem::linkTo(CategorieTranslationCrudController::class, 'Traductions de catégories', 'fas fa-language')->setAction(Action::INDEX);
+
         yield MenuItem::section();
         yield MenuItem::linkToUrl('Voir le site', 'fas fa-arrow-up-right-from-square', '/');
         yield MenuItem::linkToLogout('Déconnexion', 'fas fa-sign-out-alt');

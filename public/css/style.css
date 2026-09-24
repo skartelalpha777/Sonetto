@@ -244,6 +244,78 @@ a {
     box-shadow: none;
 }
 
+/* ---------- Sélecteur de langue (navbar) ---------- */
+.language-switcher .dropdown {
+    position: relative;
+}
+
+.language-switcher__toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem 0.6rem;
+    border-radius: 50px;
+    transition: var(--transition);
+}
+
+.language-switcher__toggle:hover {
+    background-color: rgba(11, 30, 61, 0.06);
+}
+
+.language-switcher .fi {
+    width: 1.3em;
+    height: 1.3em;
+    border-radius: 50%;
+    background-size: cover;
+    box-shadow: 0 0 0 1px rgba(11, 30, 61, 0.1);
+}
+
+.language-switcher .toggle-dropdown {
+    font-size: 0.7rem;
+    color: #0B1E3D;
+    transition: transform 0.2s ease;
+}
+
+.language-switcher .dropdown:hover .toggle-dropdown,
+.language-switcher .dropdown:focus-within .toggle-dropdown {
+    transform: rotate(180deg);
+}
+
+.language-switcher .dropdown > ul {
+    list-style: none;
+    margin: 0;
+    padding: 0.5rem;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: #fff;
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-md);
+    display: none;
+    flex-direction: column;
+    gap: 0.25rem;
+    min-width: 3rem;
+    z-index: 1000;
+}
+
+.language-switcher .dropdown:hover > ul,
+.language-switcher .dropdown:focus-within > ul {
+    display: flex;
+}
+
+.language-switcher .dropdown > ul li a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.35rem;
+    border-radius: var(--radius-sm);
+}
+
+.language-switcher .dropdown > ul li a:hover,
+.language-switcher .dropdown > ul li a.active {
+    background-color: rgba(22, 119, 255, 0.1);
+}
+
 /* ---------- Hero (page d'accueil) ---------- */
 /* La photo (sonnette + téléphone) sert de fond à toute la section : un dégradé
    sombre par-dessus garde le texte lisible côté gauche et laisse apparaître

@@ -7,10 +7,14 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Knp\DoctrineBehaviors\Contract\Entity\TranslatableInterface;
+use Knp\DoctrineBehaviors\Model\Translatable\TranslatableTrait;
 
 #[ORM\Entity(repositoryClass: ProduitRepository::class)]
-class Produit
+class Produit implements TranslatableInterface
 {
+    use TranslatableTrait;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -134,6 +138,17 @@ class Produit
         return $this;
     }
 
+    /**
+     * Description dans la langue demandée si une traduction existe, sinon
+     * retombe sur la description française (champ par défaut de l'entité).
+     */
+    public function getTranslatedDescription(string $locale): ?string
+    {
+        $description = $this->translate($locale, false)->getDescription();
+
+        return ($description !== null && $description !== '') ? $description : $this->description;
+    }
+
     public function getPrix(): ?float
     {
         return $this->prix;
@@ -209,6 +224,13 @@ class Produit
         return $this;
     }
 
+    public function getTranslatedSousTitre(string $locale): ?string
+    {
+        $sousTitre = $this->translate($locale, false)->getSousTitre();
+
+        return ($sousTitre !== null && $sousTitre !== '') ? $sousTitre : $this->sousTitre;
+    }
+
     public function getPointsForts(): ?string
     {
         return $this->pointsForts;
@@ -222,23 +244,43 @@ class Produit
     }
 
     /**
+     * Découpe un texte "une phrase par ligne" en tableau de lignes non vides.
+     *
+     * @return string[]
+     */
+    private function decouperLignes(?string $texte): array
+    {
+        if (!$texte) {
+            return [];
+        }
+
+        $lignes = [];
+        foreach (preg_split('/\r\n|\r|\n/', trim($texte)) as $ligne) {
+            $ligne = trim($ligne);
+            if ($ligne !== '') {
+                $lignes[] = $ligne;
+            }
+        }
+
+        return $lignes;
+    }
+
+    /**
      * @return string[]
      */
     public function getPointsFortsListe(): array
     {
-        if (!$this->pointsForts) {
-            return [];
-        }
+        return $this->decouperLignes($this->pointsForts);
+    }
 
-        $points = [];
-        foreach (preg_split('/\r\n|\r|\n/', trim($this->pointsForts)) as $ligne) {
-            $ligne = trim($ligne);
-            if ($ligne !== '') {
-                $points[] = $ligne;
-            }
-        }
+    /**
+     * @return string[]
+     */
+    public function getTranslatedPointsFortsListe(string $locale): array
+    {
+        $traduit = $this->translate($locale, false)->getPointsForts();
 
-        return $points;
+        return $this->decouperLignes(($traduit !== null && $traduit !== '') ? $traduit : $this->pointsForts);
     }
 
     public function getPointsFortsDetail(): ?string
@@ -258,19 +300,17 @@ class Produit
      */
     public function getPointsFortsDetailListe(): array
     {
-        if (!$this->pointsFortsDetail) {
-            return [];
-        }
+        return $this->decouperLignes($this->pointsFortsDetail);
+    }
 
-        $points = [];
-        foreach (preg_split('/\r\n|\r|\n/', trim($this->pointsFortsDetail)) as $ligne) {
-            $ligne = trim($ligne);
-            if ($ligne !== '') {
-                $points[] = $ligne;
-            }
-        }
+    /**
+     * @return string[]
+     */
+    public function getTranslatedPointsFortsDetailListe(string $locale): array
+    {
+        $traduit = $this->translate($locale, false)->getPointsFortsDetail();
 
-        return $points;
+        return $this->decouperLignes(($traduit !== null && $traduit !== '') ? $traduit : $this->pointsFortsDetail);
     }
 
     /**
@@ -288,6 +328,16 @@ class Produit
         return $detail !== [] ? $detail : $this->getPointsFortsListe();
     }
 
+    /**
+     * @return string[]
+     */
+    public function getTranslatedPointsFortsCompletListe(string $locale): array
+    {
+        $detail = $this->getTranslatedPointsFortsDetailListe($locale);
+
+        return $detail !== [] ? $detail : $this->getTranslatedPointsFortsListe($locale);
+    }
+
     public function getAvertissement(): ?string
     {
         return $this->avertissement;
@@ -298,6 +348,13 @@ class Produit
         $this->avertissement = $avertissement;
 
         return $this;
+    }
+
+    public function getTranslatedAvertissement(string $locale): ?string
+    {
+        $avertissement = $this->translate($locale, false)->getAvertissement();
+
+        return ($avertissement !== null && $avertissement !== '') ? $avertissement : $this->avertissement;
     }
 
     public function isAVenir(): bool
