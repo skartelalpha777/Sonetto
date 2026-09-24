@@ -104,7 +104,10 @@
                            ce qui permet d'y inclure des liens <a> vers d'autres produits. #}
                         <div class="produit-avertissement">
                             <i class="bi bi-exclamation-triangle-fill"></i>
-                            <span>{{ produit.getTranslatedAvertissement(app.request.locale)|raw }}</span>
+                            {# Les liens vers d'autres produits sont saisis en admin sous la forme href="/produits/{id}"
+                               (sans langue, pour rester simples à écrire) : on les recompose ici avec la langue
+                               courante pour qu'ils pointent vers une URL qui existe réellement. #}
+                            <span>{{ produit.getTranslatedAvertissement(app.request.locale)|replace({'href="/produits/': 'href="/' ~ app.request.locale ~ '/produits/'})|raw }}</span>
                         </div>
                     {% endif %}
 
