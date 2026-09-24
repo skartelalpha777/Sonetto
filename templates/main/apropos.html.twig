@@ -1,14 +1,14 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}À propos — {{ entreprise_nom }}{% endblock %}
-{% block meta_description %}{{ entreprise_nom }}, spécialiste de la sonnette vidéo connectée à {{ entreprise_zone }}. Installation professionnelle, paiement seulement une fois satisfait.{% endblock %}
+{% block meta_description %}{{ entreprise_nom }}, {% trans %}spécialiste de la sonnette vidéo connectée à{% endtrans %} {{ entreprise_zone }}. {% trans %}Installation professionnelle, paiement seulement une fois satisfait.{% endtrans %}{% endblock %}
 
 {% block body %}
 
     <header class="page-header">
         <div class="container">
             <h1>À propos de {{ entreprise_nom }}</h1>
-            <p>Spécialiste de la sonnette vidéo connectée à Bruxelles.</p>
+            <p>{% trans %}Spécialiste de la sonnette vidéo connectée à Bruxelles.{% endtrans %}</p>
         </div>
     </header>
 
@@ -16,35 +16,28 @@
         <div class="container">
             <div class="row g-5 align-items-center">
                 <div class="col-lg-6">
-                    <h2>Notre mission</h2>
+                    <h2>{% trans %}Notre mission{% endtrans %}</h2>
                     <p>
-                        {{ entreprise_nom }} vend, installe et configure des sonnettes vidéo connectées
-                        directement chez les particuliers. Notre objectif : que chacun puisse voir et parler
-                        à ses visiteurs depuis son smartphone, sans se soucier de la partie technique.
+                        {{ entreprise_nom }} {% trans %}vend, installe et configure des sonnettes vidéo connectées directement chez les particuliers. Notre objectif : que chacun puisse voir et parler à ses visiteurs depuis son smartphone, sans se soucier de la partie technique.{% endtrans %}
                     </p>
                     <p>
-                        Nous intervenons à {{ entreprise_zone }}, du choix du modèle à la configuration
-                        complète de l'application sur votre téléphone.
+                        {% trans %}Nous intervenons à{% endtrans %} {{ entreprise_zone }}, {% trans %}du choix du modèle à la configuration complète de l'application sur votre téléphone.{% endtrans %}
                     </p>
 
-                    <h2 class="mt-4">Notre zone d'intervention</h2>
+                    <h2 class="mt-4">{% trans %}Notre zone d'intervention{% endtrans %}</h2>
                     <p>
-                        Bruxelles (les 19 communes de la Région) et les villes dans les environs.
+                        {% trans %}Bruxelles (les 19 communes de la Région) et les villes dans les environs.{% endtrans %}
                     </p>
                 </div>
                 <div class="col-lg-6">
                     <div class="feature-card text-start">
                         <div class="icon-circle">💳</div>
-                        <h3>Pourquoi "payez après installation" ?</h3>
+                        <h3>{% trans %}Pourquoi "payez après installation" ?{% endtrans %}</h3>
                         <p>
-                            Nous savons que réserver un devis ou verser un acompte pour un appareil
-                            que l'on n'a pas encore vu fonctionner peut freiner. C'est pour ça que nous
-                            avons choisi un modèle simple : nous installons d'abord, vous testez la
-                            sonnette, et vous ne réglez la facture une fois que tout marche bien.
+                            {% trans %}Nous savons que réserver un devis ou verser un acompte pour un appareil que l'on n'a pas encore vu fonctionner peut freiner. C'est pour ça que nous avons choisi un modèle simple : nous installons d'abord, vous testez la sonnette, et vous ne réglez la facture une fois que tout marche bien.{% endtrans %}
                         </p>
                         <p class="mb-0">
-                            C'est notre manière de nous engager sur la qualité de l'installation plutôt
-                            que sur un discours commercial.
+                            {% trans %}C'est notre manière de nous engager sur la qualité de l'installation plutôt que sur un discours commercial.{% endtrans %}
                         </p>
                     </div>
                 </div>
@@ -54,12 +47,12 @@
 
     <section class="section bg-alt">
         <div class="container text-center">
-            <h2>Une question avant de vous décider ?</h2>
-            <p class="text-muted mb-4">Écrivez-nous directement sur WhatsApp, on vous répond rapidement.</p>
+            <h2>{% trans %}Une question avant de vous décider ?{% endtrans %}</h2>
+            <p class="text-muted mb-4">{% trans %}Écrivez-nous directement sur WhatsApp, on vous répond rapidement.{% endtrans %}</p>
             <a href="https://wa.me/{{ whatsapp_number }}?text={{ whatsapp_message_defaut|url_encode }}"
                target="_blank" rel="noopener" class="btn-whatsapp btn-whatsapp--lg">
                 {{ include('partials/_icone_whatsapp.html.twig') }}
-                Discuter sur WhatsApp
+                {% trans %}Discuter sur WhatsApp{% endtrans %}
             </a>
         </div>
     </section>

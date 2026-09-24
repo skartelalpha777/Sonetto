@@ -1,16 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Contact —
-	{{ entreprise_nom }}
-{% endblock %}
-{% block meta_description %}Contactez {{ entreprise_nom }} par WhatsApp pour installer votre sonnette vidéo connectée à {{ entreprise_zone }}. Réponse rapide, sans engagement.{% endblock %}
+{% block title %}Contact — {{ entreprise_nom }}{% endblock %}
+{% block meta_description %}{% trans %}Contactez{% endtrans %} {{ entreprise_nom }} {% trans %}par WhatsApp pour installer votre sonnette vidéo connectée à{% endtrans %} {{ entreprise_zone }}. {% trans %}Réponse rapide, sans engagement.{% endtrans %}{% endblock %}
 
 {% block body %}
 
 	<header class="page-header">
 		<div class="container">
-			<h1>Contactez-nous</h1>
-			<p>La façon la plus rapide de nous joindre : WhatsApp.</p>
+			<h1>{% trans %}Contactez-nous{% endtrans %}</h1>
+			<p>{% trans %}La façon la plus rapide de nous joindre : WhatsApp.{% endtrans %}</p>
 		</div>
 	</header>
 
@@ -20,11 +18,11 @@
 
 				<div class="col-lg-6">
 					<div class="contact-hero-btn">
-						<h2>Discutons de votre installation</h2>
-						<p class="text-muted mb-4">Réponse rapide, sans engagement.</p>
+						<h2>{% trans %}Discutons de votre installation{% endtrans %}</h2>
+						<p class="text-muted mb-4">{% trans %}Réponse rapide, sans engagement.{% endtrans %}</p>
 						<a href="https://wa.me/{{ whatsapp_number }}?text={{ whatsapp_message_defaut|url_encode }}" target="_blank" rel="noopener" class="btn-whatsapp btn-whatsapp--lg">
 							{{ include('partials/_icone_whatsapp.html.twig') }}
-							Discuter sur WhatsApp
+							{% trans %}Discuter sur WhatsApp{% endtrans %}
 						</a>
 					</div>
 
@@ -32,9 +30,9 @@
 						<div class="contact-info-item">
 							<span class="icon-circle">📞</span>
 							<div>
-								<h4>Téléphone</h4>
+								<h4>{% trans %}Téléphone{% endtrans %}</h4>
 								<p class="white-50">
-									Contact via WhatsApp</p>
+									{% trans %}Contact via WhatsApp{% endtrans %}</p>
 								<p>
 									<a href="tel:{{ entreprise_telephone|replace({' ': ''}) }}">{{ entreprise_telephone }}</a>
 								</p>
@@ -43,7 +41,7 @@
 						<div class="contact-info-item">
 							<span class="icon-circle">✉️</span>
 							<div>
-								<h4>Email</h4>
+								<h4>{% trans %}Email{% endtrans %}</h4>
 								<p>
 									<a href="mailto:{{ entreprise_email }}">{{ entreprise_email }}</a>
 								</p>
@@ -52,15 +50,15 @@
 						<div class="contact-info-item">
 							<span class="icon-circle">📍</span>
 							<div>
-								<h4>Zone de couverture</h4>
+								<h4>{% trans %}Zone de couverture{% endtrans %}</h4>
 								<p>{{ entreprise_zone }}</p>
 							</div>
 						</div>
 						<div class="contact-info-item">
 							<span class="icon-circle">🕒</span>
 							<div>
-								<h4>Horaires</h4>
-								<p>Lundi – Vendredi : 9h – 19h</p>
+								<h4>{% trans %}Horaires{% endtrans %}</h4>
+								<p>{% trans %}Lundi – Vendredi : 9h – 19h{% endtrans %}</p>
 							</div>
 						</div>
 					</div>
@@ -68,7 +66,7 @@
 
 				<div class="col-lg-6">
 					<div class="map-wrapper">
-						<iframe src="https://www.google.com/maps?q=Bruxelles,Belgique&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Zone d'intervention {{ entreprise_nom }} "></iframe>
+						<iframe src="https://www.google.com/maps?q=Bruxelles,Belgique&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="{% trans %}Zone d'intervention{% endtrans %} {{ entreprise_nom }}"></iframe>
 					</div>
 				</div>
 

@@ -1,23 +1,23 @@
 {% extends 'security/_layout.html.twig' %}
 
-{% block title %}Mot de passe oublié — Administration {{ entreprise_nom }}{% endblock %}
+{% block title %}{% trans %}Mot de passe oublié — Administration{% endtrans %} {{ entreprise_nom }}{% endblock %}
 
 {% block card_content %}
-    <h1>Mot de passe oublié</h1>
-    <p class="subtitle">Indique ton email, tu recevras un lien pour réinitialiser ton mot de passe.</p>
+    <h1>{% trans %}Mot de passe oublié{% endtrans %}</h1>
+    <p class="subtitle">{% trans %}Indique ton email, tu recevras un lien pour réinitialiser ton mot de passe.{% endtrans %}</p>
 
     {{ form_start(requestForm) }}
         {{ form_errors(requestForm) }}
         <div class="mb-3">
-            {{ form_label(requestForm.email, 'Email', {label_attr: {class: 'form-label'}}) }}
+            {{ form_label(requestForm.email, 'Email'|trans, {label_attr: {class: 'form-label'}}) }}
             {{ form_widget(requestForm.email, {attr: {class: 'form-control'}}) }}
             {{ form_errors(requestForm.email) }}
         </div>
 
-        <button class="btn-pill btn-pill--block" type="submit">Envoyer le lien</button>
+        <button class="btn-pill btn-pill--block" type="submit">{% trans %}Envoyer le lien{% endtrans %}</button>
     {{ form_end(requestForm) }}
 
     <p class="text-center mt-4 mb-0">
-        <a href="{{ path('app_login') }}" class="text-muted small">← Retour à la connexion</a>
+        <a href="{{ path('app_login') }}" class="text-muted small">{% trans %}← Retour à la connexion{% endtrans %}</a>
     </p>
 {% endblock %}

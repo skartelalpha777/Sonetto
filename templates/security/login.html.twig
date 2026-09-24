@@ -1,9 +1,9 @@
 {% extends 'security/_layout.html.twig' %}
 
-{% block title %}Connexion — Administration {{ entreprise_nom }}{% endblock %}
+{% block title %}{% trans %}Connexion — Administration{% endtrans %} {{ entreprise_nom }}{% endblock %}
 
 {% block card_content %}
-    <h1>Espace administration</h1>
+    <h1>{% trans %}Espace administration{% endtrans %}</h1>
 
     {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -15,27 +15,27 @@
 
     <form method="post">
         <div class="mb-3">
-            <label for="username" class="form-label">Email</label>
+            <label for="username" class="form-label">{% trans %}Email{% endtrans %}</label>
             <input type="email" value="{{ last_username }}" name="_username" id="username"
                    class="form-control" autocomplete="email" required autofocus>
         </div>
 
         <div class="mb-2">
-            <label for="password" class="form-label">Mot de passe</label>
+            <label for="password" class="form-label">{% trans %}Mot de passe{% endtrans %}</label>
             <input type="password" name="_password" id="password" class="form-control"
                    autocomplete="current-password" required>
         </div>
 
         <div class="text-end mb-3">
-            <a href="{{ path('app_forgot_password_request') }}" class="small">Mot de passe oublié ?</a>
+            <a href="{{ path('app_forgot_password_request') }}" class="small">{% trans %}Mot de passe oublié ?{% endtrans %}</a>
         </div>
 
         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-        <button class="btn-pill btn-pill--block" type="submit">Se connecter</button>
+        <button class="btn-pill btn-pill--block" type="submit">{% trans %}Se connecter{% endtrans %}</button>
     </form>
 
     <p class="text-center mt-4 mb-0">
-        <a href="{{ path('app_accueil') }}" class="text-muted small">← Retour au site</a>
+        <a href="{{ path('app_accueil') }}" class="text-muted small">{% trans %}← Retour au site{% endtrans %}</a>
     </p>
 {% endblock %}

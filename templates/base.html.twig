@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}{{ entreprise_nom }} | Sonnettes vidéo connectées{% endblock %}</title>
-    <meta name="description" content="{% block meta_description %}Vente, installation et configuration de sonnettes vidéo connectées à Bruxelles. Payez seulement après installation.{% endblock %}">
+    <meta name="description" content="{% block meta_description %}{% trans %}Vente, installation et configuration de sonnettes vidéo connectées à Bruxelles. Payez seulement après installation.{% endtrans %}{% endblock %}">
 
     {# URL canonique : évite les problèmes de contenu dupliqué (ex: mêmes pages
        accessibles avec ou sans paramètres de tracking). #}
@@ -66,7 +66,7 @@
         </a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSonetto"
-                aria-controls="navbarSonetto" aria-expanded="false" aria-label="Ouvrir le menu">
+                aria-controls="navbarSonetto" aria-expanded="false" aria-label="{% trans %}Ouvrir le menu{% endtrans %}">
             <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -74,16 +74,16 @@
         <div class="collapse navbar-collapse" id="navbarSonetto">
             <ul class="navbar-nav mx-auto mb-3 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link {{ app.request.attributes.get('_route') == 'app_accueil' ? 'active' }}" href="{{ path('app_accueil') }}">Accueil</a>
+                    <a class="nav-link {{ app.request.attributes.get('_route') == 'app_accueil' ? 'active' }}" href="{{ path('app_accueil') }}">{% trans %}Accueil{% endtrans %}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ app.request.attributes.get('_route') == 'app_apropos' ? 'active' }}" href="{{ path('app_apropos') }}">À propos</a>
+                    <a class="nav-link {{ app.request.attributes.get('_route') == 'app_apropos' ? 'active' }}" href="{{ path('app_apropos') }}">{% trans %}À propos{% endtrans %}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ app.request.attributes.get('_route') == 'app_produits' ? 'active' }}" href="{{ path('app_produits') }}">Produits</a>
+                    <a class="nav-link {{ app.request.attributes.get('_route') == 'app_produits' ? 'active' }}" href="{{ path('app_produits') }}">{% trans %}Produits{% endtrans %}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ app.request.attributes.get('_route') == 'app_contact' ? 'active' }}" href="{{ path('app_contact') }}">Contact</a>
+                    <a class="nav-link {{ app.request.attributes.get('_route') == 'app_contact' ? 'active' }}" href="{{ path('app_contact') }}">{% trans %}Contact{% endtrans %}</a>
                 </li>
             </ul>
 
@@ -91,7 +91,7 @@
             <a href="https://wa.me/{{ whatsapp_number }}?text={{ whatsapp_message_defaut|url_encode }}"
                target="_blank" rel="noopener" class="btn-whatsapp btn-whatsapp--sm">
                 {{ include('partials/_icone_whatsapp.html.twig') }}
-                Discuter sur WhatsApp
+                {% trans %}Discuter sur WhatsApp{% endtrans %}
             </a>
         </div>
     </div>
@@ -109,19 +109,19 @@
                 <div class="col-md-4">
                     <div class="footer-badge">
                         <span class="icon-circle"><i class="bi bi-credit-card"></i></span>
-                        Paiement après installation
+                        {% trans %}Paiement après installation{% endtrans %}
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="footer-badge">
                         <span class="icon-circle"><i class="bi bi-headset"></i></span>
-                        Support réactif
+                        {% trans %}Support réactif{% endtrans %}
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="footer-badge">
                         <span class="icon-circle"><i class="bi bi-shield-check"></i></span>
-                        Installation garantie
+                        {% trans %}Installation garantie{% endtrans %}
                     </div>
                 </div>
             </div>
@@ -132,7 +132,7 @@
                 <div class="footer-brand mb-3">
                     <img src="{{ asset('images/logo-blanc.svg') }}" alt="{{ entreprise_nom }}" height="46">
                 </div>
-                <p class="text-white-50">Vente, installation et configuration de sonnettes vidéo connectées à domicile, {{ entreprise_zone }}.</p>
+                <p class="text-white-50">{% trans %}Vente, installation et configuration de sonnettes vidéo connectées à domicile,{% endtrans %} {{ entreprise_zone }}.</p>
                 <div class="footer-social mt-3">
                     <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
                     <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
@@ -140,35 +140,35 @@
                 </div>
             </div>
             <div class="col-6 col-lg-2">
-                <h4>Navigation</h4>
-                <a href="{{ path('app_accueil') }}">Accueil</a>
-                <a href="{{ path('app_apropos') }}">À propos</a>
-                <a href="{{ path('app_produits') }}">Produits</a>
-                <a href="{{ path('app_contact') }}">Contact</a>
+                <h4>{% trans %}Navigation{% endtrans %}</h4>
+                <a href="{{ path('app_accueil') }}">{% trans %}Accueil{% endtrans %}</a>
+                <a href="{{ path('app_apropos') }}">{% trans %}À propos{% endtrans %}</a>
+                <a href="{{ path('app_produits') }}">{% trans %}Produits{% endtrans %}</a>
+                <a href="{{ path('app_contact') }}">{% trans %}Contact{% endtrans %}</a>
             </div>
             <div class="col-6 col-lg-3">
-                <h4>Aide</h4>
-                <a href="{{ path('app_contact') }}">Zone de couverture</a>
-                <a href="{{ path('app_apropos') }}">Comment ça marche</a>
-                <a href="#">Questions fréquentes</a>
+                <h4>{% trans %}Aide{% endtrans %}</h4>
+                <a href="{{ path('app_contact') }}">{% trans %}Zone de couverture{% endtrans %}</a>
+                <a href="{{ path('app_apropos') }}">{% trans %}Comment ça marche{% endtrans %}</a>
+                <a href="#">{% trans %}Questions fréquentes{% endtrans %}</a>
             </div>
             <div class="col-6 col-lg-3">
-                <h4>Contact</h4>
+                <h4>{% trans %}Contact{% endtrans %}</h4>
                 <a href="mailto:{{ entreprise_email }}">{{ entreprise_email }}</a>
                 <a href="tel:{{ entreprise_telephone|replace({' ': ''}) }}">{{ entreprise_telephone }}</a>
-                <a href="https://wa.me/{{ whatsapp_number }}" target="_blank" rel="noopener">WhatsApp direct</a>
+                <a href="https://wa.me/{{ whatsapp_number }}" target="_blank" rel="noopener">{% trans %}WhatsApp direct{% endtrans %}</a>
             </div>
         </div>
 
         <div class="footer-bottom">
-            &copy; {{ "now"|date('Y') }} {{ entreprise_nom }} —  Tous droits réservés.
+            &copy; {{ "now"|date('Y') }} {{ entreprise_nom }} — {% trans %}TVA BE0000.000.000 — Tous droits réservés.{% endtrans %}
         </div>
     </div>
 </footer>
 
 {# Bouton WhatsApp flottant, visible sur toutes les pages (surtout utile en scrollant sur mobile) #}
 <a href="https://wa.me/{{ whatsapp_number }}?text={{ whatsapp_message_defaut|url_encode }}"
-   target="_blank" rel="noopener" class="whatsapp-float" aria-label="Discuter sur WhatsApp">
+   target="_blank" rel="noopener" class="whatsapp-float" aria-label="{% trans %}Discuter sur WhatsApp{% endtrans %}">
     {{ include('partials/_icone_whatsapp.html.twig') }}
 </a>
 

@@ -1,9 +1,9 @@
 {% extends 'security/_layout.html.twig' %}
 
-{% block title %}Nouveau mot de passe — Administration {{ entreprise_nom }}{% endblock %}
+{% block title %}{% trans %}Nouveau mot de passe — Administration{% endtrans %} {{ entreprise_nom }}{% endblock %}
 
 {% block card_content %}
-    <h1>Choisir un nouveau mot de passe</h1>
+    <h1>{% trans %}Choisir un nouveau mot de passe{% endtrans %}</h1>
 
     {% for message in app.flashes('reset_password_error') %}
         <div class="alert alert-danger">{{ message }}</div>
@@ -22,6 +22,6 @@
             {{ form_errors(resetForm.plainPassword.second) }}
         </div>
 
-        <button class="btn-pill btn-pill--block" type="submit">Changer le mot de passe</button>
+        <button class="btn-pill btn-pill--block" type="submit">{% trans %}Changer le mot de passe{% endtrans %}</button>
     {{ form_end(resetForm) }}
 {% endblock %}

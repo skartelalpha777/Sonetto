@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}{{ entreprise_nom }} | Sonnettes vidéo connectées{% endblock %}
-{% block meta_description %}Vente et installation de sonnettes vidéo connectées à Bruxelles : caméra, détection intelligente, carillon. Payez seulement après installation, sans acompte.{% endblock %}
+{% block meta_description %}{% trans %}Vente et installation de sonnettes vidéo connectées à Bruxelles : caméra, détection intelligente, carillon. Payez seulement après installation, sans acompte.{% endtrans %}{% endblock %}
 
 {% block body %}
 
@@ -10,11 +10,10 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-7">
-                    <span class="hero-badge"><i class="bi bi-shield-check"></i> Votre sécurité, notre priorité</span>
-                    <h1>Une sonnette vidéo connectée, installée chez vous, <span class="highlight">sans risque</span></h1>
+                    <span class="hero-badge"><i class="bi bi-shield-check"></i> {% trans %}Votre sécurité, notre priorité{% endtrans %}</span>
+                    <h1>{% trans %}Une sonnette vidéo connectée, installée chez vous, <span class="highlight">sans risque</span>{% endtrans %}</h1>
                     <p class="lead">
-                        Surveillez votre porte, où que vous soyez. {{ entreprise_nom }} vous propose des sonnettes
-                        vidéo connectées de qualité, avec une installation professionnelle et une configuration complète.
+                        {% trans %}Surveillez votre porte, où que vous soyez.{% endtrans %} {{ entreprise_nom }} {% trans %}vous propose des sonnettes vidéo connectées de qualité, avec une installation professionnelle et une configuration complète.{% endtrans %}
                     </p>
 
                     <div class="row hero-features g-3">
@@ -22,8 +21,8 @@
                             <div class="hero-feature">
                                 <span class="icon-circle"><i class="bi bi-eye"></i></span>
                                 <div>
-                                    <strong>Vision HD</strong>
-                                    <span>Jour et nuit</span>
+                                    <strong>{% trans %}Vision HD{% endtrans %}</strong>
+                                    <span>{% trans %}Jour et nuit{% endtrans %}</span>
                                 </div>
                             </div>
                         </div>
@@ -31,8 +30,8 @@
                             <div class="hero-feature">
                                 <span class="icon-circle"><i class="bi bi-bell"></i></span>
                                 <div>
-                                    <strong>Détection de mouvement</strong>
-                                    <span>Alertes en temps réel</span>
+                                    <strong>{% trans %}Détection de mouvement{% endtrans %}</strong>
+                                    <span>{% trans %}Alertes en temps réel{% endtrans %}</span>
                                 </div>
                             </div>
                         </div>
@@ -40,8 +39,8 @@
                             <div class="hero-feature">
                                 <span class="icon-circle"><i class="bi bi-mic"></i></span>
                                 <div>
-                                    <strong>Communication bidirectionnelle</strong>
-                                    <span>Parlez et écoutez</span>
+                                    <strong>{% trans %}Communication bidirectionnelle{% endtrans %}</strong>
+                                    <span>{% trans %}Parlez et écoutez{% endtrans %}</span>
                                 </div>
                             </div>
                         </div>
@@ -49,8 +48,8 @@
                             <div class="hero-feature">
                                 <span class="icon-circle"><i class="bi bi-phone"></i></span>
                                 <div>
-                                    <strong>Accès à distance</strong>
-                                    <span>Depuis votre smartphone</span>
+                                    <strong>{% trans %}Accès à distance{% endtrans %}</strong>
+                                    <span>{% trans %}Depuis votre smartphone{% endtrans %}</span>
                                 </div>
                             </div>
                         </div>
@@ -60,10 +59,10 @@
                         <a href="https://wa.me/{{ whatsapp_number }}?text={{ whatsapp_message_defaut|url_encode }}"
                            target="_blank" rel="noopener" class="btn-pill btn-pill--lg">
                             {{ include('partials/_icone_whatsapp.html.twig') }}
-                            Discuter sur WhatsApp
+                            {% trans %}Discuter sur WhatsApp{% endtrans %}
                         </a>
                         <a href="{{ path('app_produits') }}" class="btn-outline-light-custom">
-                            Voir nos produits
+                            {% trans %}Voir nos produits{% endtrans %}
                         </a>
                     </div>
                 </div>
@@ -75,17 +74,19 @@
     <section class="section bg-white">
         <div class="container">
             <div class="section-title">
-                <span class="section-eyebrow">Nos produits</span>
-                <h2>{{ produits_vedette|length }} modèle{{ produits_vedette|length > 1 ? 's' }} pour répondre à tous vos besoins</h2>
-                <p>Choisissez la sonnette connectée qui vous convient. Tous nos modèles sont livrés avec une installation professionnelle et une configuration complète.</p>
+                <span class="section-eyebrow">{% trans %}Nos produits{% endtrans %}</span>
+                <h2>{{ ('%count% modèle pour répondre à tous vos besoins|%count% modèles pour répondre à tous vos besoins')|trans({'%count%': produits_vedette|length}) }}</h2>
+                <p>{% trans %}Choisissez la sonnette connectée qui vous convient. Tous nos modèles sont livrés avec une installation professionnelle et une configuration complète.{% endtrans %}</p>
             </div>
 
             {% if produits_vedette is empty %}
-                <p class="text-center text-muted">Aucun produit publié pour le moment. Ajoutez-en depuis l'espace <a href="{{ path('admin') }}">administration</a>.</p>
+                <p class="text-center text-muted">
+                    {% trans with {'%url%': path('admin')} %}Aucun produit publié pour le moment. Ajoutez-en depuis l'espace <a href="%url%">administration</a>.{% endtrans %}
+                </p>
             {% else %}
                 <div class="row g-4">
                     {% for produit in produits_vedette %}
-                        {{ include('partials/_carte_produit.html.twig', { produit: produit, badge: loop.index == 2 ? 'Le plus populaire' : null }) }}
+                        {{ include('partials/_carte_produit.html.twig', { produit: produit, badge: loop.index == 2 ? ('Le plus populaire'|trans) : null }) }}
                     {% endfor %}
                 </div>
             {% endif %}
@@ -96,36 +97,36 @@
     <section class="section bg-alt">
         <div class="container">
             <div class="section-title">
-                <span class="section-eyebrow">Pourquoi choisir {{ entreprise_nom }} ?</span>
-                <h2>Une solution complète et sans tracas</h2>
+                <span class="section-eyebrow">{% trans %}Pourquoi choisir{% endtrans %} {{ entreprise_nom }} ?</span>
+                <h2>{% trans %}Une solution complète et sans tracas{% endtrans %}</h2>
             </div>
             <div class="row g-4">
                 <div class="col-md-6 col-lg-3">
                     <div class="feature-plain">
                         <div class="icon-circle"><i class="bi bi-award"></i></div>
-                        <h3>Matériel de qualité</h3>
-                        <p>Des marques fiables et performantes.</p>
+                        <h3>{% trans %}Matériel de qualité{% endtrans %}</h3>
+                        <p>{% trans %}Des marques fiables et performantes.{% endtrans %}</p>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-3">
                     <div class="feature-plain">
                         <div class="icon-circle"><i class="bi bi-tools"></i></div>
-                        <h3>Installation professionnelle</h3>
-                        <p>Par nos techniciens certifiés.</p>
+                        <h3>{% trans %}Installation professionnelle{% endtrans %}</h3>
+                        <p>{% trans %}Par nos techniciens certifiés.{% endtrans %}</p>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-3">
                     <div class="feature-plain">
                         <div class="icon-circle"><i class="bi bi-gear"></i></div>
-                        <h3>Configuration incluse</h3>
-                        <p>Application, réseau et réglages.</p>
+                        <h3>{% trans %}Configuration incluse{% endtrans %}</h3>
+                        <p>{% trans %}Application, réseau et réglages.{% endtrans %}</p>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-3">
                     <div class="feature-plain">
                         <div class="icon-circle"><i class="bi bi-headset"></i></div>
-                        <h3>Support réactif</h3>
-                        <p>Une équipe à votre écoute.</p>
+                        <h3>{% trans %}Support réactif{% endtrans %}</h3>
+                        <p>{% trans %}Une équipe à votre écoute.{% endtrans %}</p>
                     </div>
                 </div>
             </div>
@@ -137,15 +138,13 @@
         <div class="container">
             <div class="row g-5 align-items-center">
                 <div class="col-lg-6 engagement-image">
-                    <img src="{{ asset('images/installation-illustration.svg') }}" alt="Installation d'une sonnette connectée par un technicien">
+                    <img src="{{ asset('images/installation-illustration.svg') }}" alt="{% trans %}Installation d'une sonnette connectée par un technicien{% endtrans %}">
                 </div>
                 <div class="col-lg-6">
-                    <span class="section-eyebrow" style="text-align:left;">Notre engagement</span>
-                    <h2>Une installation simple et rapide</h2>
+                    <span class="section-eyebrow" style="text-align:left;">{% trans %}Notre engagement{% endtrans %}</span>
+                    <h2>{% trans %}Une installation simple et rapide{% endtrans %}</h2>
                     <p class="text-muted">
-                        Nos techniciens s'occupent de tout : pose de la sonnette, configuration de votre
-                        application et tests de fonctionnement. Vous n'avez rien à gérer, et vous ne payez
-                        qu'une fois l'installation validée.
+                        {% trans %}Nos techniciens s'occupent de tout : pose de la sonnette, configuration de votre application et tests de fonctionnement. Vous n'avez rien à gérer, et vous ne payez qu'une fois l'installation validée.{% endtrans %}
                     </p>
                 </div>
             </div>
@@ -156,29 +155,29 @@
     <section class="section bg-alt">
         <div class="container">
             <div class="section-title">
-                <span class="section-eyebrow">Comment ça marche</span>
-                <h2>Trois étapes simples, sans engagement avant l'installation</h2>
+                <span class="section-eyebrow">{% trans %}Comment ça marche{% endtrans %}</span>
+                <h2>{% trans %}Trois étapes simples, sans engagement avant l'installation{% endtrans %}</h2>
             </div>
             <div class="row g-4">
                 <div class="col-md-4">
                     <div class="etape">
                         <div class="etape__numero">1</div>
-                        <h3>Contact WhatsApp</h3>
-                        <p>Vous nous écrivez le modèle qui vous intéresse et votre disponibilité.</p>
+                        <h3>{% trans %}Contact WhatsApp{% endtrans %}</h3>
+                        <p>{% trans %}Vous nous écrivez le modèle qui vous intéresse et votre disponibilité.{% endtrans %}</p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="etape">
                         <div class="etape__numero">2</div>
-                        <h3>Installation à domicile</h3>
-                        <p>Notre technicien installe et configure la sonnette chez vous.</p>
+                        <h3>{% trans %}Installation à domicile{% endtrans %}</h3>
+                        <p>{% trans %}Notre technicien installe et configure la sonnette chez vous.{% endtrans %}</p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="etape">
                         <div class="etape__numero">3</div>
-                        <h3>Paiement une fois satisfait</h3>
-                        <p>Vous testez l'appareil et ne payez que si tout fonctionne comme prévu.</p>
+                        <h3>{% trans %}Paiement une fois satisfait{% endtrans %}</h3>
+                        <p>{% trans %}Vous testez l'appareil et ne payez que si tout fonctionne comme prévu.{% endtrans %}</p>
                     </div>
                 </div>
             </div>
@@ -189,12 +188,12 @@
     <section class="section">
         <div class="container">
             <div class="cta-banner text-center">
-                <h2>Prêt à sécuriser votre entrée ?</h2>
-                <p class="mb-4">Discutez avec notre équipe sur WhatsApp pour obtenir un devis personnalisé.</p>
+                <h2>{% trans %}Prêt à sécuriser votre entrée ?{% endtrans %}</h2>
+                <p class="mb-4">{% trans %}Discutez avec notre équipe sur WhatsApp pour obtenir un devis personnalisé.{% endtrans %}</p>
                 <a href="https://wa.me/{{ whatsapp_number }}?text={{ whatsapp_message_defaut|url_encode }}"
                    target="_blank" rel="noopener" class="btn-whatsapp btn-whatsapp--lg">
                     {{ include('partials/_icone_whatsapp.html.twig') }}
-                    Discuter sur WhatsApp
+                    {% trans %}Discuter sur WhatsApp{% endtrans %}
                 </a>
             </div>
         </div>

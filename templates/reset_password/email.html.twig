@@ -1,13 +1,13 @@
-<p>Bonjour,</p>
+<p>{% trans %}Bonjour,{% endtrans %}</p>
 
-<p>Une demande de réinitialisation de mot de passe a été faite pour votre compte administrateur {{ entreprise_nom }}.</p>
+<p>{% trans %}Une demande de réinitialisation de mot de passe a été faite pour votre compte administrateur{% endtrans %} {{ entreprise_nom }}.</p>
 
 <p>
     <a href="{{ url('app_reset_password', {token: resetToken.token}) }}">
-        Cliquez ici pour choisir un nouveau mot de passe
+        {% trans %}Cliquez ici pour choisir un nouveau mot de passe{% endtrans %}
     </a>
 </p>
 
-<p>Ce lien est valable {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.</p>
+<p>{% trans with {'%duree%': resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle')} %}Ce lien est valable %duree%.{% endtrans %}</p>
 
-<p>Si vous n'êtes pas à l'origine de cette demande, vous pouvez ignorer cet email.</p>
+<p>{% trans %}Si vous n'êtes pas à l'origine de cette demande, vous pouvez ignorer cet email.{% endtrans %}</p>

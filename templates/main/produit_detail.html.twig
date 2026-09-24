@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}{{ produit.nom }} — {{ entreprise_nom }}{% endblock %}
-{% block meta_description %}{{ produit.sousTitre ?: produit.nom }} — {{ produit.prix|number_format(0, ',', ' ') }} €, installation et configuration incluses à Bruxelles.{% endblock %}
+{% block meta_description %}{{ produit.sousTitre ?: produit.nom }} — {{ produit.prix|number_format(0, ',', ' ') }} €, {% trans %}installation et configuration incluses à Bruxelles.{% endtrans %}{% endblock %}
 {% block og_image %}{{ produit.imagePrincipale ? absolute_url(asset('images/produits/' ~ produit.imagePrincipale)) : parent() }}{% endblock %}
 
 {% block stylesheets %}
@@ -35,7 +35,7 @@
     <header class="page-header">
         <div class="container">
             <a href="{{ path('app_produits') }}" class="page-header__retour">
-                <i class="bi bi-arrow-left"></i> Retour aux produits
+                <i class="bi bi-arrow-left"></i> {% trans %}Retour aux produits{% endtrans %}
             </a>
             <h1>{{ produit.nom }}</h1>
             <p>{{ produit.categorie.nom }}</p>
@@ -53,7 +53,7 @@
                         <div id="carousel-produit-{{ produit.id }}" class="carousel slide produit-carousel" data-bs-ride="carousel" data-bs-interval="3500">
                             <div class="carousel-indicators">
                                 {% for img in images %}
-                                    <button type="button" data-bs-target="#carousel-produit-{{ produit.id }}" data-bs-slide-to="{{ loop.index0 }}" class="{{ loop.first ? 'active' }}" aria-current="{{ loop.first ? 'true' }}" aria-label="Photo {{ loop.index }}"></button>
+                                    <button type="button" data-bs-target="#carousel-produit-{{ produit.id }}" data-bs-slide-to="{{ loop.index0 }}" class="{{ loop.first ? 'active' }}" aria-current="{{ loop.first ? 'true' }}" aria-label="{{ ('Photo %num%')|trans({'%num%': loop.index}) }}"></button>
                                 {% endfor %}
                             </div>
                             <div class="carousel-inner">
@@ -62,18 +62,18 @@
                                         {# La 1ère photo (visible immédiatement) charge en priorité ;
                                            les suivantes ne se chargent que si l'utilisateur les affiche. #}
                                         <img src="{{ asset('images/produits/' ~ img) }}" class="d-block w-100"
-                                             alt="{{ produit.nom }} — photo {{ loop.index }}"
+                                             alt="{{ produit.nom }} — {{ ('Photo %num%')|trans({'%num%': loop.index}) }}"
                                              loading="{{ loop.first ? 'eager' : 'lazy' }}">
                                     </div>
                                 {% endfor %}
                             </div>
                             <button class="carousel-control-prev" type="button" data-bs-target="#carousel-produit-{{ produit.id }}" data-bs-slide="prev">
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Précédent</span>
+                                <span class="visually-hidden">{% trans %}Précédent{% endtrans %}</span>
                             </button>
                             <button class="carousel-control-next" type="button" data-bs-target="#carousel-produit-{{ produit.id }}" data-bs-slide="next">
                                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Suivant</span>
+                                <span class="visually-hidden">{% trans %}Suivant{% endtrans %}</span>
                             </button>
                         </div>
                     {% else %}
@@ -88,11 +88,11 @@
                 <div class="col-lg-6">
                     <span class="produit-card__categorie">{{ produit.categorie.nom }}</span>
                     {% if produit.aVenir %}
-                        <span class="produit-card__badge produit-card__badge--venir produit-card__badge--inline">Produit à venir</span>
+                        <span class="produit-card__badge produit-card__badge--venir produit-card__badge--inline">{% trans %}Produit à venir{% endtrans %}</span>
                     {% endif %}
                     <h2 class="mt-2">{{ produit.nom }}</h2>
                     {% if produit.sousTitre or produit.resolution %}
-                        <p class="produit-card__sous-titre fs-6">{{ produit.sousTitre ?: 'Caméra ' ~ produit.resolution }}</p>
+                        <p class="produit-card__sous-titre fs-6">{{ produit.sousTitre ?: (('Caméra %res%')|trans({'%res%': produit.resolution})) }}</p>
                     {% endif %}
 
                     {% if produit.description %}
@@ -114,22 +114,22 @@
                                 <li><i class="bi bi-check-circle-fill"></i> {{ point }}</li>
                             {% endfor %}
                         {% else %}
-                            {% if produit.autonomie %}<li><i class="bi bi-check-circle-fill"></i> Autonomie : {{ produit.autonomie }}</li>{% endif %}
-                            {% if produit.stockage %}<li><i class="bi bi-check-circle-fill"></i> Stockage : {{ produit.stockage }}</li>{% endif %}
-                            <li><i class="bi bi-check-circle-fill"></i> Alimentation : {{ produit.alimentation }}</li>
-                            <li><i class="bi bi-check-circle-fill"></i> Application mobile incluse</li>
+                            {% if produit.autonomie %}<li><i class="bi bi-check-circle-fill"></i> {{ ('Autonomie : %value%')|trans({'%value%': produit.autonomie}) }}</li>{% endif %}
+                            {% if produit.stockage %}<li><i class="bi bi-check-circle-fill"></i> {{ ('Stockage : %value%')|trans({'%value%': produit.stockage}) }}</li>{% endif %}
+                            <li><i class="bi bi-check-circle-fill"></i> {{ ('Alimentation : %value%')|trans({'%value%': produit.alimentation}) }}</li>
+                            <li><i class="bi bi-check-circle-fill"></i> {% trans %}Application mobile incluse{% endtrans %}</li>
                         {% endif %}
                     </ul>
 
                     <div class="detail-prix-bloc">
                         <div class="produit-card__prix">{{ produit.prix|number_format(0, ',', ' ') }} €</div>
-                        <span class="produit-card__prix-note">Installation + configuration incluses</span>
+                        <span class="produit-card__prix-note">{% trans %}Installation + configuration incluses{% endtrans %}</span>
                     </div>
 
-                    <a href="https://wa.me/{{ whatsapp_number }}?text={{ ('Bonjour, je souhaite installer la sonnette ' ~ produit.nom)|url_encode }}"
+                    <a href="https://wa.me/{{ whatsapp_number }}?text={{ (('Bonjour, je souhaite installer la sonnette %nom%')|trans({'%nom%': produit.nom}))|url_encode }}"
                        target="_blank" rel="noopener" class="btn-pill btn-pill--lg">
                         {{ include('partials/_icone_whatsapp.html.twig') }}
-                        Choisir cette offre <i class="bi bi-arrow-right"></i>
+                        {% trans %}Choisir cette offre{% endtrans %} <i class="bi bi-arrow-right"></i>
                     </a>
                 </div>
             </div>
@@ -137,8 +137,8 @@
             {# ==================== PRODUITS SIMILAIRES ==================== #}
             {% if produits_similaires|length > 0 %}
                 <div class="section-title mt-5 pt-4">
-                    <span class="section-eyebrow">Vous aimerez aussi</span>
-                    <h2>Produits similaires</h2>
+                    <span class="section-eyebrow">{% trans %}Vous aimerez aussi{% endtrans %}</span>
+                    <h2>{% trans %}Produits similaires{% endtrans %}</h2>
                 </div>
                 <div class="row g-4">
                     {% for autre in produits_similaires %}

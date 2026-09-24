@@ -1,16 +1,14 @@
 {% extends 'security/_layout.html.twig' %}
 
-{% block title %}Vérifie ta boîte mail — Administration {{ entreprise_nom }}{% endblock %}
+{% block title %}{% trans %}Vérifie ta boîte mail — Administration{% endtrans %} {{ entreprise_nom }}{% endblock %}
 
 {% block card_content %}
-    <h1><i class="bi bi-envelope-check text-success"></i> Vérifie ta boîte mail</h1>
+    <h1>{% trans %}<i class="bi bi-envelope-check text-success"></i> Vérifie ta boîte mail{% endtrans %}</h1>
     <p class="subtitle mb-0">
-        Si un compte existe pour cette adresse, un email vient de t'être envoyé avec un lien
-        pour choisir un nouveau mot de passe. Le lien est valable
-        {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.
+        {% trans with {'%duree%': resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle')} %}Si un compte existe pour cette adresse, un email vient de t'être envoyé avec un lien pour choisir un nouveau mot de passe. Le lien est valable %duree%.{% endtrans %}
     </p>
 
     <p class="text-center mt-4 mb-0">
-        <a href="{{ path('app_login') }}" class="text-muted small">← Retour à la connexion</a>
+        <a href="{{ path('app_login') }}" class="text-muted small">{% trans %}← Retour à la connexion{% endtrans %}</a>
     </p>
 {% endblock %}

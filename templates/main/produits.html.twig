@@ -1,14 +1,14 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Nos produits — {{ entreprise_nom }}{% endblock %}
-{% block meta_description %}Catalogue de sonnettes vidéo connectées : EZVIZ, TP-Link Tapo et modèles Sonetto. Comparez résolution, autonomie et carillon, installation incluse à Bruxelles.{% endblock %}
+{% block meta_description %}{% trans %}Catalogue de sonnettes vidéo connectées : EZVIZ, TP-Link Tapo et modèles Sonetto. Comparez résolution, autonomie et carillon, installation incluse à Bruxelles.{% endtrans %}{% endblock %}
 
 {% block body %}
 
     <header class="page-header">
         <div class="container">
-            <h1>Nos sonnettes vidéo connectées</h1>
-            <p>Filtrez par catégorie pour trouver le modèle qui vous correspond.</p>
+            <h1>{% trans %}Nos sonnettes vidéo connectées{% endtrans %}</h1>
+            <p>{% trans %}Filtrez par catégorie pour trouver le modèle qui vous correspond.{% endtrans %}</p>
         </div>
     </header>
 
@@ -18,7 +18,7 @@
             {# ==================== FILTRES (inutile s'il n'y a qu'une seule catégorie) ==================== #}
             {% if categories|length > 1 %}
                 <div class="filtres-bar d-flex flex-wrap gap-2 justify-content-center">
-                    <button type="button" class="filtre-btn active" data-filtre="tous">Tous</button>
+                    <button type="button" class="filtre-btn active" data-filtre="tous">{% trans %}Tous{% endtrans %}</button>
                     {% for categorie in categories %}
                         <button type="button" class="filtre-btn" data-filtre="{{ categorie.id }}">{{ categorie.nom }}</button>
                     {% endfor %}
@@ -27,7 +27,9 @@
 
             {# ==================== GRILLE PRODUITS ==================== #}
             {% if produits is empty %}
-                <p class="text-center text-muted">Aucun produit publié pour le moment. Ajoutez-en depuis l'espace <a href="{{ path('admin') }}">administration</a>.</p>
+                <p class="text-center text-muted">
+                    {% trans with {'%url%': path('admin')} %}Aucun produit publié pour le moment. Ajoutez-en depuis l'espace <a href="%url%">administration</a>.{% endtrans %}
+                </p>
             {% else %}
                 <div class="row g-4">
                     {% for produit in produits %}

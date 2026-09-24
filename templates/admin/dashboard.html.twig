@@ -1,6 +1,6 @@
 {% extends '@EasyAdmin/page/content.html.twig' %}
 
-{% block page_title %}Tableau de bord{% endblock %}
+{% block page_title %}{% trans %}Tableau de bord{% endtrans %}{% endblock %}
 
 {% block main %}
     <div class="row g-3 mb-4">
@@ -24,10 +24,9 @@
 
     <div class="card border-0 shadow-sm">
         <div class="card-body">
-            <h5 class="card-title mb-3">Bienvenue dans l'administration Sonetto</h5>
+            <h5 class="card-title mb-3">{% trans %}Bienvenue dans l'administration{% endtrans %} {{ entreprise_nom }}</h5>
             <p class="text-muted mb-0">
-                Utilisez le menu à gauche pour gérer vos produits, catégories et la galerie photo.
-                Pense à cocher "Actif" sur un produit pour qu'il apparaisse sur le site public.
+                {% trans %}Utilisez le menu à gauche pour gérer vos produits, catégories et la galerie photo. Pense à cocher "Actif" sur un produit pour qu'il apparaisse sur le site public.{% endtrans %}
             </p>
         </div>
     </div>

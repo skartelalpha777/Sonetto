@@ -1,11 +1,11 @@
 {# Carte produit réutilisée sur la page d'accueil et la page catalogue.
    Variables attendues :
    - produit (entité App\Entity\Produit)
-   - badge (texte optionnel, ex: "Le plus populaire") #}
+   - badge (texte optionnel, déjà traduit par l'appelant, ex: "Le plus populaire") #}
 <div class="col-md-6 col-lg-4 produit-card-col" data-categorie="{{ produit.categorie.id }}">
     <div class="produit-card">
         {% if produit.aVenir %}
-            <span class="produit-card__badge produit-card__badge--venir">Produit à venir</span>
+            <span class="produit-card__badge produit-card__badge--venir">{% trans %}Produit à venir{% endtrans %}</span>
         {% elseif badge is defined and badge %}
             <span class="produit-card__badge">{{ badge }}</span>
         {% endif %}
@@ -19,7 +19,7 @@
             <span class="produit-card__categorie">{{ produit.categorie.nom }}</span>
             <h3><a href="{{ path('app_produit_detail', { id: produit.id }) }}" class="produit-card__titre-lien">{{ produit.nom }}</a></h3>
             {% if produit.sousTitre or produit.resolution %}
-                <p class="produit-card__sous-titre">{{ produit.sousTitre ?: 'Caméra ' ~ produit.resolution }}</p>
+                <p class="produit-card__sous-titre">{{ produit.sousTitre ?: (('Caméra %res%')|trans({'%res%': produit.resolution})) }}</p>
             {% endif %}
 
             <ul class="produit-card__specs">
@@ -28,20 +28,20 @@
                         <li><i class="bi bi-check-circle-fill"></i> {{ point }}</li>
                     {% endfor %}
                 {% else %}
-                    {% if produit.autonomie %}<li><i class="bi bi-check-circle-fill"></i> Autonomie : {{ produit.autonomie }}</li>{% endif %}
-                    {% if produit.stockage %}<li><i class="bi bi-check-circle-fill"></i> Stockage : {{ produit.stockage }}</li>{% endif %}
-                    <li><i class="bi bi-check-circle-fill"></i> Alimentation : {{ produit.alimentation }}</li>
-                    <li><i class="bi bi-check-circle-fill"></i> Application mobile incluse</li>
+                    {% if produit.autonomie %}<li><i class="bi bi-check-circle-fill"></i> {{ ('Autonomie : %value%')|trans({'%value%': produit.autonomie}) }}</li>{% endif %}
+                    {% if produit.stockage %}<li><i class="bi bi-check-circle-fill"></i> {{ ('Stockage : %value%')|trans({'%value%': produit.stockage}) }}</li>{% endif %}
+                    <li><i class="bi bi-check-circle-fill"></i> {{ ('Alimentation : %value%')|trans({'%value%': produit.alimentation}) }}</li>
+                    <li><i class="bi bi-check-circle-fill"></i> {% trans %}Application mobile incluse{% endtrans %}</li>
                 {% endif %}
             </ul>
 
             <div class="produit-card__footer">
                 <div class="produit-card__prix">{{ produit.prix|number_format(0, ',', ' ') }} €</div>
-                <span class="produit-card__prix-note">Installation + configuration incluses</span>
+                <span class="produit-card__prix-note">{% trans %}Installation + configuration incluses{% endtrans %}</span>
 
-                <a href="https://wa.me/{{ whatsapp_number }}?text={{ ('Bonjour, je souhaite installer le modèle "' ~ produit.nom ~ '"')|url_encode }}"
+                <a href="https://wa.me/{{ whatsapp_number }}?text={{ (('Bonjour, je souhaite installer le modèle "%nom%"')|trans({'%nom%': produit.nom}))|url_encode }}"
                    target="_blank" rel="noopener" class="btn-pill btn-pill--block">
-                    Choisir cette offre <i class="bi bi-arrow-right"></i>
+                    {% trans %}Choisir cette offre{% endtrans %} <i class="bi bi-arrow-right"></i>
                 </a>
             </div>
         </div>
