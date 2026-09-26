@@ -35,6 +35,8 @@ class UserCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         yield IdField::new('id')->hideOnForm();
+        yield TextField::new('prenom', 'Prénom');
+        yield TextField::new('nom', 'Nom');
         yield EmailField::new('email', 'Email');
         yield ChoiceField::new('roles', 'Rôle')
             ->setChoices(['Administrateur' => 'ROLE_ADMIN'])
@@ -47,7 +49,7 @@ class UserCrudController extends AbstractCrudController
             ->setRequired($pageName === Crud::PAGE_NEW)
             ->setHelp($pageName === Crud::PAGE_EDIT
                 ? 'Laisser vide pour conserver le mot de passe actuel.'
-                : null);
+                : '');
     }
 
     public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void
