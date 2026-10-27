@@ -7,7 +7,12 @@ DirectoryIndex index.php
 <IfModule mod_rewrite.c>
     RewriteEngine On
 
-    # Force HTTPS : redirige toute requête HTTP vers la version HTTPS.
+    # 1. Redirige www vers le domaine principal sans www (évite le contenu dupliqué)
+    RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+    RewriteRule ^ https://%1%{REQUEST_URI} [R=301,L]
+
+    # 2. Force HTTPS : redirige toute requête HTTP vers la version HTTPS (sauf en local)
+    RewriteCond %{HTTP_HOST} !^(localhost|127\.0\.0\.1) [NC]
     RewriteCond %{HTTPS} off
     RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
